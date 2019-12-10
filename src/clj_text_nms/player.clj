@@ -1,5 +1,9 @@
 (ns clj-text-nms.player (:gen-class)
-    (:require [clj-text-nms.logic :as logic]))
+    (:require [clj-text-nms.logic :as logic])
+    (:require [clj-text-nms.map :as map]))
+
+(declare add-item)
+(declare rmv-item)
 
 ; A record for the player.
 ; HP - Health Points
@@ -19,13 +23,13 @@
 ; Modifies the player's life support according to the current planet.
 ; If life support is zero, decrease player's HP by 10.
 ; Return the new player status.
-(def tick-planet [player tile]
+(defn tick-planet [player tile]
     "Modify the player's Life Support Status based on the current planet."
-    (let [planet ((:planet tile) loc-obj-map)]
+    (let [planet ((:planet tile) map/loc-obj-map)]
         (if (:shelter nil)
             (let [new-state (update-in player :ls #(- % (:ls-drop planet)))]
                 (if (<= (:ls new-state) 0)
-                    (update-in (assoc player :ls 0) :hp #(- # 10))
+                    (update-in (assoc :ls player 0) :hp #(- % 10))
                     new-state
                 )
             )
@@ -37,7 +41,7 @@
 ; Mine resources on the current planet.
 ; Returns the new player status.
 (defn mine [player tile]
-    (let mined-res [(logic/mine tile player)]
+    (let [mined-res (logic/mine tile player)]
         (add-item player mined-res)
     )
 )
@@ -52,8 +56,8 @@
 
 ; items - Items to remove.
 ; If amount not sufficient, returns nil and inventory is not modified.
-(defn rmv-item [plater items]
+(defn rmv-item [player items]
     (let [new-inv (logic/subtract-hashmap (:inventory player) items)]
-        (if (nil? new-env) nil (assoc :inventory player new-inv))
+        (if (nil? new-inv) nil (assoc :inventory player new-inv))
     )
 )
