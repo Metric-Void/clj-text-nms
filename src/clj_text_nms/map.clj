@@ -1,45 +1,46 @@
 (ns clj-text-nms.map
   (:gen-class))
 
-(defrecord Tile [type planet id shelter base desc res res-ext])
+(defrecord Tile [type planet id shelter desc res res-ext])
 (defrecord Planet [type galaxy id desc temp rad tox ls-drop])
 (defrecord Galaxy [planets])
 
 ;Short description of elements.
 (def name-map {
-  :observatory "Observatory"
-  :carbon "Carbon"
-  :di-hydro "Di-Hydrogen"
-  :oxygen "Oxygen"
-  :ferrite-dust "Ferrite Dust"
-  :paraff "Paraffinium"
-  :cond-carbon "Condensed Carbon"
-  :mag-ferrite "Magnetized Ferrite"
-  :ura "Uranium"
-  :ammo "Ammonium"
-  :sulf "Sulfur"
-  :co2 "CO2"
-  :cu "Copper"
-  :chro "Chromatic Metal"
-  :cl "Chloride"
+  :observatory "Observatory",
+  :carbon "Carbon",
+  :di-hydro "Di-Hydrogen",
+  :oxygen "Oxygen",
+  :ferrite-dust "Ferrite Dust",
+  :paraff "Paraffinium",
+  :cond-carbon "Condensed Carbon",
+  :mag-ferrite "Magnetized Ferrite",
+  :ura "Uranium",
+  :ammo "Ammonium",
+  :sulf "Sulfur",
+  :co2 "CO2",
+  :cu "Copper",
+  :chro "Chromatic Metal",
+  :cl "Chloride",
+  :adv-laster "Advanced mining laser."
 })
 
 (def loc-map {
-  :g-lkx "Limekell X"
-  :p-3dba "Mabiangra-II"
-  :t-3dba-xfce "Lowell-Kowin Outpost"
+  :g-lkx "Limekell X",
+  :p-3dba "Mabiangra-II",
+  :t-3dba-xfce "Lowell-Kowin Outpost",
   :t-3dba-xbea "Kerbin-August Swamp"
 })
 
-(def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 0))
+(def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
 
-(def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory nil
+(def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory-one
                            "An open ground with a Gek Observatory in the center.\nYou can see lots of plants around, but no animals.\nRocks on the ground seems to be rich of ferrite."
-                           {:carbon 10 :di-hydro 3 :oxygen 3 :ferrite-dust 10 :parraff 5}
-                           {:cond-carbon 5 :mag-ferrite 3 :sic-pow 3}))
+                           {:carbon 5 :di-hydro 3 :oxygen 3 :ferrite-dust 5 :parraff 2}
+                           {:cond-carbon 2 :mag-ferrite 3 :sic-pow 3}))
 
-(def Mabiangra-II-II (Tile. :normal :p-3dba :t-3dba-xbea nil nil
-                            "This place seems to be full of flowers.\nFlowers on the ground are rich in sodium and oxygen."
+(def Mabiangra-II-II (Tile. :normal :p-3dba :t-3dba-xbea nil
+                            "This place seems to be full of flowers.\nFlowers on the ground are rich in oxygen."
                             {:carbon 3 :oxygen 8} {:mag-ferrite 3}))
 
 (def loc-obj-map {
@@ -47,6 +48,16 @@
   :t-3dba-xfce Mabiangra-II-I
   :t-3dba-xbea Mabiangra-II-II
 })
+
+(def explore-functions {
+  :observatory-one observatory-one
+})
+
+(def observatory-one [player]
+  (println "The terminal in the observatory was not logged out by the last user.")
+  (println "You retrieved a location data from it.")
+  ; TODO
+)
 
 (defn describe-planet [planet]
   (println (format "Planet: %s\nEnvironment: %s\nDescription: %s\nTemperature(avg.): %fC\nRadioactivity: %f rad.\nToxicity: %f tox."
