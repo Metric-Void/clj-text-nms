@@ -51,7 +51,7 @@
 ; Add the items to player's inventory.
 ; Returns new player status.
 (defn add-item [player items]
-    (assoc :inventory player (logic/combine-hashmap (:inventory player) items))
+    (assoc player :inventory (logic/combine-hashmap (:inventory player) items))
 )
 
 ; items - Items to remove.
