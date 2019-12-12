@@ -6,4 +6,8 @@
   :dependencies [[org.clojure/clojure "1.10.0"]]
   :main ^:skip-aot clj-text-nms.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+              :dev {:plugins [[lein-midje "3.2.1"]
+                              [lein-auto "0.1.3"]] 
+                    :dependencies [[midje "1.9.9"]]}}
+)

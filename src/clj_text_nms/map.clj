@@ -22,7 +22,7 @@
   :cu "Copper",
   :chro "Chromatic Metal",
   :cl "Chloride",
-  :adv-laster "Advanced mining laser."
+  :adv-laser "Advanced mining laser."
 })
 
 (def planet-envs {
@@ -33,7 +33,7 @@
     :cold   "Cold - This is a frosty planet with ice everywhere.\n
             Solid Carbon Dioxide can be easily found here.\n
             Life support will drop as time goes.\n"
-    :hot    "Hot - This planet is burning. Everything looks red.\n
+    :hot    "Hot - This planet is burning. Everything looks reddish.\n
             Sulfur can be found abundant here.\n
             Life support will drop as time goes."
     :tox    "The atmosphere on this planet is toxic. \n
@@ -54,7 +54,7 @@
 
 (def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory-one
                            "An open ground with a Gek Observatory in the center.\nYou can see lots of plants around, but no animals.\nRocks on the ground seems to be rich of ferrite."
-                           {:carbon 5 :di-hydro 3 :oxygen 3 :ferrite-dust 5 :parraff 2}
+                           {:carbon 5 :di-hydro 3 :oxygen 3 :ferrite-dust 5 :paraff 2}
                            {:cond-carbon 2 :mag-ferrite 3 :sic-pow 3}))
 
 (def Mabiangra-II-II (Tile. :normal :p-3dba :t-3dba-xbea nil
