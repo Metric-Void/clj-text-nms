@@ -13,6 +13,8 @@ jobs:
       run: lein deps
     - name: Check grammar errors
       run: lein check
-    - name: Run tests
+    - name: Run clojure tests
       run: lein test
+    - name: Midje tests
+      run: lein midje
     
