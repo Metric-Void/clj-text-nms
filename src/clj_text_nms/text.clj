@@ -1,23 +1,81 @@
 (ns clj-text-nms.text
     (:gen-class)
-    (:require [clojure.string :as str])
-    )
+    (:require [clj-text-nms.map :as map])
+    (:require [clj-text-nms.logic :as logic]))
 
-(defn str-inventory
+(defn msg-inventory
     [state]
     (loop
         [nums   (vals (:inventory state))
          items  (keys (:inventory state))
-         msg    "You have"]
+         msg    "You Inventory:\n"]
         
         (if (empty? nums)
-            (str msg ".")
+            msg
             (recur
                 (rest nums)
                 (rest items)
-                (if (> (first nums) 1)
-                    (str msg " " (name (first keys)) "(s)")
-                    (str msg " " (name (first keys)))
+                (format "%1s %2$18s %3$3d\n" msg ((first items) map/name-map) (first nums))
+                )
+            )
+        )
+    )
+
+(defn msg-craftable
+    [state]
+    (loop
+        [recipes (logic/craftable state)
+         count   0
+         msg     "Things you can craft:\n"]
+
+        (if (empty? recipes)
+            msg
+            (let [recipe (first recipes)]
+                (recur
+                    (rest recipes)
+                    (inc count)
+                    (format "%1$s%2$2d: %3$18s %4$3d\n"
+                        msg
+                        count
+                        ((first (keys (last recipe))) map/name-map)
+                        (first (vals (last recipe)))
+                        )
+                    )
+                )
+            )
+        )
+    )
+
+(defn msg-craft-cost
+    [state recipe num]
+    (loop
+        [materials  (keys (first recipe))
+         num-need   (vals (first recipe))
+         insuff     false
+         insu-mat   nil
+         msg        "This will cost:\n"]
+
+        (if (empty? materials)
+            (if insuff
+                [false (str msg "You don't have enough " insu-mat ".\n")]
+                [true (str msg "Do you wish to proceed? [Y/n]")]
+                )
+            (recur
+                (rest materials)
+                (rest num-need)
+                (if (> (* (first num-need) num) ((first materials) (:inventory state)))
+                    true
+                    insuff
+                    )
+                (if (and (not insuff) (> (* (first num-need) num) ((first materials) (:inventory state))))
+                    ((first materials) map/name-map)
+                    insu-mat
+                    )
+                (format "%1s%2$18s %3$3d (You have %4$d)\n"
+                    msg
+                    ((first materials) map/name-map)
+                    (* (first num-need) num)
+                    ((first materials) (:inventory state))
                     )
                 )
             )
