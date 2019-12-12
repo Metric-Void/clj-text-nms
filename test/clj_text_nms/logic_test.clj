@@ -24,8 +24,12 @@
         (subtract-hashmap {:a 1} {:b 2, :c 3}) => nil
     )
     (fact "An item can be removed."
-        (subtract-hashmap {:a 1, :b 2} {:b 2}) => {:a 1}
-        (subtract-hashmap {:g 4 :p 3} {:p 2}) => {:g 4, :p 1}
+        (subtract-hashmap {:a 1, :b 2} {:b 1}) => {:a 1, :b 1}
+        (subtract-hashmap {:g 4, :p 3} {:p 2}) => {:g 4, :p 1}
+    )
+    (fact "Make sure that items with count 0 are removed"
+        (subtract-hashmap {:a 1, :b 1} {:a 1}) => {:b, 1}
+        (subtract-hashmap {:a 1, :b 1} {:a 1, :b 1}) => {}
     )
     (fact "Not enough item"
         (subtract-hashmap {:a 4} {:a 5}) => nil
@@ -33,5 +37,10 @@
     )
     (fact "Orphan keys"
         (subtract-hashmap {:a 4, :b 3} {:b 6, :c 7}) => nil
+    )
+    (fact "Weirdos"
+        (subtract-hashmap {} {}) => {}
+        (subtract-hashmap {} {:a 1}) => nil
+        (subtract-hashmap {:a 1} {}) => {:a 1}
     )
 )
