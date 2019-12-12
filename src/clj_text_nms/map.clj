@@ -47,7 +47,8 @@
   :g-lkx "Limekell X",
   :p-3dba "Mabiangra-II",
   :t-3dba-xfce "Lowell-Kowin Outpost",
-  :t-3dba-xbea "Kerbin-August Swamp"
+  :t-3dba-xbea "Kerbin-August Swamp",
+  :t-3dba-xcaf "Anton-Webbs Lowland"
 })
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
@@ -59,18 +60,33 @@
 
 (def Mabiangra-II-II (Tile. :normal :p-3dba :t-3dba-xbea nil
                             "This place seems to be full of flowers.\nFlowers on the ground are rich in oxygen."
-                            {:carbon 3 :oxygen 8} {:mag-ferrite 3}))
+                            {:carbon 3 :oxygen 4} {:mag-ferrite 3}))
+
+(def Mabiangra-II-III (Tile. :monster :p-3dba :p-3dba-xcaf nil
+                            "This is a dense forest.\nTrees grow so closely together that it is gloomy even at noon.\nThe fog that covers the depth of the forest forest makes it look creepier."
+                            {:carbon 5 :oxygen 3 :paraff 2}
+                            {:cond-carbon 5}))
 
 (def loc-obj-map {
   :p-3dba Mabiangra-II
   :t-3dba-xfce Mabiangra-II-I
   :t-3dba-xbea Mabiangra-II-II
+  :t-3dba-xcaf Mabiangra-II-III
 })
 
 (defn observatory-one [player]
   (println "The terminal in the observatory was not logged out by the last user.")
   (println "You retrieved a location data from it.")
   ; TODO
+)
+
+(defn monster [player]
+  (println "All of a sudden, a giant tentacle reaches out and attacks you.")
+  (println "Although you are horrified, you fought back with your laser gun.")
+  (println "The tentacle retreated.")
+  (as-> player p
+    (update p :hp #(- % (+ (rand-int 5) 5)))
+    (update p :ls #(- % 5)))
 )
 
 (def explore-functions {
