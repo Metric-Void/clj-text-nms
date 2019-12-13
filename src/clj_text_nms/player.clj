@@ -30,11 +30,11 @@
         (if-not (contains? (:base-tiles player) (:tile player))
             (let [new-state (update-in player :ls #(- % (:ls-drop planet)))]
                 (if (<= (:ls new-state) 0)
-                    (update-in (assoc :ls player 0) :hp #(- % 10))
+                    (update (assoc :ls player 0) :hp #(- % 10))
                     new-state
                 )
             )
-            (update-in player :ls #(+ % 2))
+            (update player :ls #(+ % 2))
         )
     )
 )
@@ -77,7 +77,7 @@
                 (println "Establishing a base requires 25 chromatic metal. You do not have enough.")
                 (do
                     (println "Success // You've established a base on this tile.")
-                    (update-in new-player :base-tiles #(conj % (:tile player)))
+                    (update new-player :base-tiles #(conj % (:tile player)))
                 )
             )
         )
@@ -97,4 +97,82 @@
             )
         )
     )
+)
+
+; Teleport to a location on the map
+; Both tile and planet will be changed.
+; Starship does not follow the player
+(defn teleport [player newtile]
+    (assoc player :tile newtile :planet (:planet (newtile map/loc-obj-map)))
+)
+
+; Interactive command, recharge Life Support.
+; Returns new player status.
+(defn recharge-life-support [player]
+    "Prompts to recharge Life Support"
+    (if (contains? (:inventory player) :oxygen)
+        (let [
+            single-charge 3                                                 ; Defines how much LS each oxygen charges.
+            required-amount (int (/ (- 100 (:ls player) single-charge)))    ; Required amount to charge to full
+            have-amount (:oxygen (:inventory player))       ; The amount of oxygen the player have.
+            use-amount (min required-amount have-amount)    ; The actual amount of Oxygen that can be used.
+            ls-change-amount (* single-charge use-amount)   ; The amount of LS charged
+            after-charge (+ (:ls player) ls-change-amount)     ; The value after charging
+        ]
+            (println (format "Use %d oxygen to charge Life Support from %d to %d?\n[1] Yes [2] No" use-amount (:ls player) after-charge))
+            (if (= (read) 1)
+                (do (println "Success!") (assoc player :ls after-charge))
+                (do (println "Cancelled") player)
+            )
+        )
+        (do (println "Recharging life support requires Oxygen, which you don't have any.") player)
+    )
+)
+
+; Recharge life support without asking
+(defn recharge-ls-silent [player]
+    "Silently recharge Life Support"
+    (if (contains? (:inventory player) :oxygen)
+        (let [
+            single-charge 3                                                 ; Defines how much LS each oxygen charges.
+            required-amount (int (/ (- 100 (:ls player) single-charge)))    ; Required amount to charge to full
+            have-amount (:oxygen (:inventory player))       ; The amount of oxygen the player have.
+            use-amount (min required-amount have-amount)    ; The actual amount of Oxygen that can be used.
+            ls-change-amount (* single-charge use-amount)   ; The amount of LS charged
+            after-charge (+ (:ls player) ls-change-amount)     ; The value after charging
+        ]
+            (assoc player :ls after-charge)
+        )
+        (do (println "Recharging life support requires Oxygen, which you don't have any.") player)
+    )
+)
+
+; Set new HP. Ensure HP is between 0 and 100.
+; Returns new player status
+(defn set-hp [player new-hp]
+    "Set the new HP."
+    (let [realhp (min 100 (max 0 new-hp))]
+        (assoc player :hp realhp))
+)
+
+; Set new LS. Ensure LS is between 0 and 100.
+; Returns new player status
+(defn set-ls [player new-ls]
+    "Set the new LS."
+    (let [realls (min 100 (max 0 new-ls))]
+        (assoc player :hp realls))
+)
+
+; Update HP with the given function.
+; Returns new player status.
+(defn update-hp [player ifn]
+    "Update HP with given function."
+    (set-hp player (ifn (:hp player)))
+)
+
+; Update LS with the given function.
+; Returns new player status.
+(defn update-ls [player ifn]
+    "Update LS with given function."
+    (set-ls player (ifn (:ls player)))
 )
