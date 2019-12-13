@@ -44,13 +44,13 @@
          msg     "Things you can craft:\n"]
 
         (if (empty? recipes)
-            msg
+            (str msg "Enter a number or [f]inish crafting.\n")
             (let [recipe (first recipes)]
                 (recur
                     (rest recipes)
                     (inc  count)
                     (format "%1$s%2$2d: %3$18s\n"
-                        msg
+                        msg 
                         count
                         ((first (keys (last recipe))) map/name-map)
                         (first (vals (last recipe)))

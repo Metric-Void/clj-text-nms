@@ -78,7 +78,10 @@
 ; Return new inventory. nil if item not enough.
 (defn craft [inventory recipe repeat]
     "Craft the given recipe many times"
-    (let [mult-recipe (mult-hashmap recipe repeat)]
-        (subtract-hashmap inventory mult-recipe)
+    (let [  required-items (first recipe)
+            product-items (second recipe)
+            mult-required-items (mult-hashmap required-items repeat)
+            mult-product-items (mult-hashmap product-items repeat)]
+        (combine-hashmap (subtract-hashmap inventory mult-required-items) mult-product-items)
     )
 )
