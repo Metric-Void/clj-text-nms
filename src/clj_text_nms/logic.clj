@@ -1,6 +1,7 @@
 (ns clj-text-nms.logic
     (:gen-class)
-    (:require [clj-text-nms.map :as map]))
+    (:require [clj-text-nms.map :as map]
+              [clojure.string :as cljstr]))
 
 (def craft-recipes
     [[{:cu 2} {:chro 1}]
@@ -84,4 +85,20 @@
             mult-product-items (mult-hashmap product-items repeat)]
         (combine-hashmap (subtract-hashmap inventory mult-required-items) mult-product-items)
     )
+)
+
+; Return a string representation of inventory, separated with ","
+; Takes a hashmap-like inventory, returns a string.
+; e.g. {:carbon 10, :cond-carbon 10} => "10 Carbon, 10 Condensed Carbon"
+(defn str-inventory [inventory]
+    "String representation of inventory"
+    (cljstr/join ", " (for [[k v] inventory]
+        (format "%d %s" v (k map/name-map))))
+)
+
+; Visualize a single crafting recipe. Returns a string.
+; e.g. [{:carbon 2} {:cond-carbon 1}] => "2 Carbon => 1 Condensed Carbon"
+(defn str-craft [recipe]
+    "Describes a crafting recipe."
+    (str (str-inventory (first recipe)) " => " (str-inventory (last recipe)))
 )
