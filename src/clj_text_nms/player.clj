@@ -142,3 +142,33 @@
         (do (println "Recharging life support requires Oxygen, which you don't have any.") player)
     )
 )
+
+; Set new HP. Ensure HP is between 0 and 100.
+; Returns new player status
+(defn set-hp [player new-hp]
+    "Set the new HP."
+    (let [realhp (min 100 (max 0 new-hp))]
+        (assoc player :hp realhp))
+)
+
+; Set new LS. Ensure LS is between 0 and 100.
+; Returns new player status
+(defn set-ls [player new-ls]
+    "Set the new LS."
+    (let [realls (min 100 (max 0 new-ls))]
+        (assoc player :hp realls))
+)
+
+; Update HP with the given function.
+; Returns new player status.
+(defn update-hp [player ifn]
+    "Update HP with given function."
+    (set-hp player (ifn (:hp player)))
+)
+
+; Update LS with the given function.
+; Returns new player status.
+(defn update-ls [player ifn]
+    "Update LS with given function."
+    (set-ls player (ifn (:ls player)))
+)
