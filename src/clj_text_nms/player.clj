@@ -1,6 +1,7 @@
 (ns clj-text-nms.player (:gen-class)
     (:require [clj-text-nms.logic :as logic])
-    (:require [clj-text-nms.map :as map]))
+    (:require [clj-text-nms.map :as map])
+    (:require [clj-text-nms.text :as text]))
 
 (declare add-item)
 (declare rmv-item)
@@ -42,7 +43,10 @@
 ; Returns the new player status.
 (defn mine [player]
     (let [mined-res (logic/mine-tilekey (:tile player) player)]
-        (add-item player mined-res)
+        (do
+            (println (text/msg-mine mined-res))
+            (add-item player mined-res)
+        )
     )
 )
 

@@ -3,6 +3,21 @@
     (:require [clj-text-nms.map :as map])
     (:require [clj-text-nms.logic :as logic]))
 
+(def op "Opening Messages.")
+
+(def options "You can
+    [M]ine in this tile
+    [S]ee your inventory
+    [C]raft new items
+    [Q]uit the game")
+
+; (defn current-state
+;     [player]
+;     "Current State."
+;     )
+
+(def current-state "Current State.")
+
 (defn msg-inventory
     [state]
     (loop
@@ -33,8 +48,8 @@
             (let [recipe (first recipes)]
                 (recur
                     (rest recipes)
-                    (inc count)
-                    (format "%1$s%2$2d: %3$18s %4$3d\n"
+                    (inc  count)
+                    (format "%1$s%2$2d: %3$18s\n"
                         msg
                         count
                         ((first (keys (last recipe))) map/name-map)
@@ -76,6 +91,29 @@
                     ((first materials) map/name-map)
                     (* (first num-need) num)
                     ((first materials) (:inventory state))
+                    )
+                )
+            )
+        )
+    )
+
+(defn msg-mine
+    [mined-res]
+    
+    (loop
+        [items (keys mined-res)
+         nums  (vals mined-res)
+         msg   "You got:\n"]
+
+        (if (empty? items)
+            msg
+            (recur
+                (rest items)
+                (rest nums)
+                (format "%1$s%2$18s %3$3d\n"
+                    msg
+                    ((first items) map/name-map)
+                    (first nums)
                     )
                 )
             )
