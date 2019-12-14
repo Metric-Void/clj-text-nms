@@ -27,20 +27,11 @@
 
 (def planet-envs {
     :lush   "Lush - This planet is full of creatures. The atmosphere is dense and gravity is normal."
-    :rad    "Radioactive - This planet is radioactive. Creatures on this planet have adapted to this envinronment and probably dangerous.\n
-            Radioactive minerals can be found abundant here. \n
-            Life support will drop as time goes."
-    :cold   "Cold - This is a frosty planet with ice everywhere.\n
-            Solid Carbon Dioxide can be easily found here.\n
-            Life support will drop as time goes.\n"
-    :hot    "Hot - This planet is burning. Everything looks reddish.\n
-            Sulfur can be found abundant here.\n
-            Life support will drop as time goes."
-    :tox    "The atmosphere on this planet is toxic. \n
-            Ammonium can be found abundant here. \n
-            Life support will drop as time goes."
-    :exotic "This planet have no atmosphere and an apparent lack of life. Life support drops rapidly.\n
-             However, metal resources can be found abundant here."
+    :rad    "Radioactive - This planet is radioactive. Creatures on this planet have adapted to this envinronment and probably dangerous.\nRadioactive minerals can be found abundant here. \nLife support will drop as time goes."
+    :cold   "Cold - This is a frosty planet with ice everywhere.\nSolid Carbon Dioxide can be easily found here.\nLife support will drop as time goes.\n"
+    :hot    "Hot - This planet is burning. Everything looks reddish.\nSulfur can be found abundant here.\nLife support will drop as time goes."
+    :tox    "The atmosphere on this planet is toxic. \nAmmonium can be found abundant here. \nLife support will drop as time goes."
+    :exotic "This planet have no atmosphere and an apparent lack of life. Life support drops rapidly.\nHowever, metal resources can be found abundant here."
 })
 
 (def loc-map {
@@ -72,25 +63,6 @@
   :t-3dba-xfce Mabiangra-II-I
   :t-3dba-xbea Mabiangra-II-II
   :t-3dba-xcaf Mabiangra-II-III
-})
-
-(defn observatory-one [player]
-  (println "The terminal in the observatory was not logged out by the last user.")
-  (println "You retrieved a location data from it.")
-  ; TODO
-)
-
-(defn monster [player]
-  (println "All of a sudden, a giant tentacle reaches out and attacks you.")
-  (println "Although you are horrified, you fought back with your laser gun.")
-  (println "The tentacle retreated.")
-  (as-> player p
-    (update p :hp #(- % (+ (rand-int 5) 5)))
-    (update p :ls #(- % 5)))
-)
-
-(def explore-functions {
-  :observatory-one observatory-one
 })
 
 (defn describe-planet [planet]

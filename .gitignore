@@ -1,4 +1,3 @@
-/target
 /classes
 /checkouts
 profiles.clj
@@ -10,3 +9,6 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
+/target/
+/.idea/
+/clj-text-nms.iml
