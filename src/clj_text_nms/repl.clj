@@ -6,6 +6,22 @@
     (:require [clojure.string :as cljstr])
     )
 
+(defn read-with-inst
+    ([]
+        (do (printf ">>")
+            (flush)
+            (read)
+            )
+        )
+    ([prompt]
+        (do (printf "%s >>" prompt)
+            (flush)
+            (read)
+            )
+        )
+    )
+
+
 (defn craft
     [player]
     (loop
@@ -13,23 +29,24 @@
          msg   (text/msg-craftable player)
          cftb  (logic/craftable player)]
         (do (println msg)
-            (let [input1 (read)]
+            (let [input1 (read-with-inst)]
                 (if (integer? input1)
                     (if (or (< input1 0) (>= input1 (count cftb)))
                         (recur
                             state
-                            "Invalid input. Enter a legit number.\n"
+                            "Invalid input. Enter a legit number."
                             cftb
                             )
                         (let [new-state
                             (let [recipe (nth cftb input1)]
                                 (loop
-                                    [input2 (read)]
+                                    [input2 (do (println "How many do you want? (You can [c]ancel crafting this item.)")
+                                                (read-with-inst))]
                                     (if (integer? input2)
                                         (if (< input2 0)
                                             (do
-                                                (println "Invalid amount.\n")
-                                                (recur (read))
+                                                (println "Invalid amount.")
+                                                (recur (read-with-inst))
                                                 )
                                             (let [try-mine (text/msg-craft-cost state recipe input2)]
                                                 (let [  flag (first try-mine)
@@ -37,13 +54,17 @@
                                                     
                                                     (do (println msg2)
                                                         (if flag
-                                                            (let [input3 (read)]
+                                                            (let [input3 (read-with-inst)]
                                                                 (if (= (cljstr/lower-case (subs (name input3) 0 1)) "y")
                                                                     (player/craft state recipe input2)
-                                                                    (recur (read))
+                                                                    (recur
+                                                                        (do (println "How many do you want? (You can [c]ancel crafting this item.)")
+                                                                            (read-with-inst)
+                                                                            )
+                                                                        )
                                                                     )
                                                                 )
-                                                            (recur (read))
+                                                            (recur (read-with-inst))
                                                             )
                                                         )
                                                     )
@@ -52,8 +73,8 @@
                                         (if (= (cljstr/lower-case (subs (name input2) 0 1)) "c")
                                             nil
                                             (do
-                                                (println "Invalid input\n")
-                                                (recur (read))
+                                                (println "Invalid input")
+                                                (recur (read-with-inst))
                                                 )
                                             )
                                         )
@@ -78,7 +99,7 @@
                         state
                         (recur
                             state
-                            "Invalid input. Enter a number or [f]inish crafting.\n"
+                            "Invalid input. Enter a number or [f]inish crafting."
                             cftb
                             )
                         )
@@ -92,19 +113,33 @@
     []
     (do (println text/op)
         (loop
-            [player (player/new-player)]
+            [player   (player/new-player)
+             newstate true]
             
-            (do (println text/current-state)
+            (do (when newstate
+                    (do
+                        (println "=============================================================")
+                        (println (text/current-state player))
+                        )
+                    )
                 (println text/options)
-                (let [input (read)]
-                    (case (cljstr/lower-case (subs (name input) 0 1))
-                        "m" (recur (player/mine player))
-                        "s" (do
-                                (println (text/msg-inventory player))
-                                (recur player)
+                (let [input (read-with-inst)]
+                    (if (keyword? input)
+                        (case (cljstr/lower-case (subs (name input) 0 1))
+                            "m" (recur (player/tick-planet (player/mine player)) true)
+                            "s" (do
+                                    (println (text/msg-inventory player))
+                                    (recur player false)
+                                    )
+                            "c" (recur (player/tick-planet (craft player)) true)
+                            "q" (println "See you again.")
+                            (do (println "Invalid input.")
+                                (recur player false)
                                 )
-                        "c" (recur (craft player))
-                        "q" "See you again."
+                            )
+                        (do (println "Invalid input.")
+                            (recur player false)
+                            )
                         )
                     )
                 )

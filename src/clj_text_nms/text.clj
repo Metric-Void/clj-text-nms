@@ -11,26 +11,26 @@
     [C]raft new items
     [Q]uit the game")
 
-; (defn current-state
-;     [player]
-;     "Current State."
-;     )
+(defn current-state
+    [player]
+    (format "Your HP: %2d%%     Life Supporting System: %2d%%" (:hp player) (:ls player))
+    )
 
-(def current-state "Current State.")
+; (def current-state "Current State.")
 
 (defn msg-inventory
     [state]
     (loop
         [nums   (vals (:inventory state))
          items  (keys (:inventory state))
-         msg    "You Inventory:\n"]
+         msg    "-------------------------------------------------------------\nYou Inventory:"]
         
         (if (empty? nums)
             msg
             (recur
                 (rest nums)
                 (rest items)
-                (format "%1s %2$18s %3$3d\n" msg ((first items) map/name-map) (first nums))
+                (format "%1s\n%2$18s %3$3d" msg ((first items) map/name-map) (first nums))
                 )
             )
         )
@@ -41,10 +41,10 @@
     (loop
         [recipes (logic/craftable state)
          count   0
-         msg     "Things you can craft:\n"]
+         msg     "-------------------------------------------------------------\nThings you can craft:\n"]
 
         (if (empty? recipes)
-            (str msg "Enter a number or [f]inish crafting.\n")
+            (str msg "Enter a number or [f]inish crafting.")
             (let [recipe (first recipes)]
                 (recur
                     (rest recipes)
@@ -68,11 +68,11 @@
          num-need   (vals (first recipe))
          insuff     false
          insu-mat   nil
-         msg        "This will cost:\n"]
+         msg        "-------------------------------------------------------------\nThis will cost:\n"]
 
         (if (empty? materials)
             (if insuff
-                [false (str msg "You don't have enough " insu-mat ".\n")]
+                [false (str msg "You don't have enough " insu-mat ".\nTry another number or [c]ancel crafting this item.")]
                 [true (str msg "Do you wish to proceed? [Y/n]")]
                 )
             (recur
@@ -103,14 +103,14 @@
     (loop
         [items (keys mined-res)
          nums  (vals mined-res)
-         msg   "You got:\n"]
+         msg   "-------------------------------------------------------------\nYou got:"]
 
         (if (empty? items)
             msg
             (recur
                 (rest items)
                 (rest nums)
-                (format "%1$s%2$18s %3$3d\n"
+                (format "%1$s\n%2$18s %3$3d"
                     msg
                     ((first items) map/name-map)
                     (first nums)

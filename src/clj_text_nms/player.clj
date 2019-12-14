@@ -24,13 +24,14 @@
 ; Modifies the player's life support according to the current planet.
 ; If life support is zero, decrease player's HP by 10.
 ; Return the new player status.
-(defn tick-planet [player tile]
+(defn tick-planet [player]
     "Modify the player's Life Support Status based on the current planet."
-    (let [planet ((:planet tile) map/loc-obj-map)]
+    (let [  tile ((:tile player) map/loc-obj-map)
+            planet ((:planet tile) map/loc-obj-map)]
         (if-not (contains? (:base-tiles player) (:tile player))
-            (let [new-state (update-in player :ls #(- % (:ls-drop planet)))]
+            (let [new-state (update player :ls #(- % (:ls-drop planet)))]
                 (if (<= (:ls new-state) 0)
-                    (update (assoc :ls player 0) :hp #(- % 10))
+                    (update (assoc player :ls 0) :hp #(- % 10))
                     new-state
                 )
             )
