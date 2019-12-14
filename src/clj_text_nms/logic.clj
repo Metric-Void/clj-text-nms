@@ -58,8 +58,7 @@
                         (:res tile))
           res-list (flatten (for [[k v] res-tile] (repeat v k)))
           res-number (if (:adv-laser player) (+ 0.2 (rand 0.6)) (+ 0.2 (rand 0.3)))
-          mined-res-list (random-sample res-number res-list)
-          ]
+          mined-res-list (random-sample res-number res-list)]
           (frequencies mined-res-list)
     )
 )
