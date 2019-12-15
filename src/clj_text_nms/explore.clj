@@ -54,8 +54,8 @@
 
   (fn [player]
     (println "You see a trail of dust getting closer and closer. Something is running towards you.")
-    (println "It seems like a gigantic surf calm, but with two strong legs supporting its tall, flat body.")
-    (println "The running surf calm scares you. You shoot it with a laser gun, and it starts to attack you.")
+    (println "It seems like a gigantic surf clam, but with two strong legs supporting its tall, flat body.")
+    (println "The running surf clam scares you. You shoot it with a laser gun, and it starts to attack you.")
     (println "It falls down and groans in despair. Then it dies. You restored some health from its flesh.")
     (as-> player p
       (update p :hp #(+ % (+ 1 (rand-int 4))))))
