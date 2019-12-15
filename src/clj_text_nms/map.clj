@@ -71,7 +71,7 @@
 
 (def Mabiangra-II-VI (Tile. :normal :p-3dba :t-3dba-xeff nil
                             "A small valley."
-                            {:carbon 1 :oxygen 3 :ferrite-dust 2}))
+                            {:carbon 1 :oxygen 3 :ferrite-dust 2} {:mag-ferrite 1 :sic-pow 1}))
 
 (def loc-obj-map {
   :p-3dba Mabiangra-II
