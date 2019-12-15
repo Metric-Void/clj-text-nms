@@ -161,7 +161,7 @@
 (defn set-ls [player new-ls]
     "Set the new LS."
     (let [realls (min 100 (max 0 new-ls))]
-        (assoc player :hp realls))
+        (assoc player :ls realls))
 )
 
 ; Update HP with the given function.

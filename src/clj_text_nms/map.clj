@@ -39,7 +39,10 @@
   :p-3dba "Mabiangra-II",
   :t-3dba-xfce "Lowell-Kowin Outpost",
   :t-3dba-xbea "Kerbin-August Swamp",
-  :t-3dba-xcaf "Anton-Webbs Lowland"
+  :t-3dba-xcaf "Anton-Webbs Lowland",
+  :t-3dba-xdab "Blorg-Rattenbury Grassland",
+  :t-3dba-xaaa "Javorian Hills",
+  :t-3dba-xeff "Rosamond Valley"
 })
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
@@ -58,11 +61,26 @@
                             {:carbon 5 :oxygen 3 :paraff 2}
                             {:cond-carbon 5}))
 
+(def Mabiangra-II-IV (Tile. :normal :p-3dba :t-3dba-xdab nil
+                            "An open grassland.\nPlants contain carbon and oxygen."
+                            {:carbon 2 :di-hydro 1 :oxygen 2 :ferrite-dust 3} {:sic-pow 2}))
+
+(def Mabiangra-II-V (Tile. :normal :p-3dba :t-3dba-xaaa nil
+                            "A beautiful hilly landscape."
+                            {:di-hydro 3 :ferrite-dust 4 :paraff 3} {:mag-ferrite 3}))
+
+(def Mabiangra-II-VI (Tile. :normal :p-3dba :t-3dba-xeff nil
+                            "A small valley."
+                            {:carbon 1 :oxygen 3 :ferrite-dust 2}))
+
 (def loc-obj-map {
   :p-3dba Mabiangra-II
   :t-3dba-xfce Mabiangra-II-I
   :t-3dba-xbea Mabiangra-II-II
   :t-3dba-xcaf Mabiangra-II-III
+  :t-3dba-xdab Mabiangra-II-IV
+  :t-3dba-xaaa Mabiangra-II-V
+  :t-3dba-xeff Mabiangra-II-VI
 })
 
 (defn describe-planet [planet]

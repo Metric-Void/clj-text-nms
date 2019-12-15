@@ -1,7 +1,8 @@
 (ns clj-text-nms.explore
   (:gen-class)
   (:require [clj-text-nms.logic :as logic]
-            [clj-text-nms.map :as map]))
+            [clj-text-nms.map :as map]
+            [clj-text-nms.player :as player]))
 
 ; items - Hashmap of items to add
 ; Add the items to player's inventory.
@@ -48,9 +49,8 @@
     (println "The tentacle was hiding inside a pit. The opening was covered by dirt, so you didn't notice.")
     (println "You are horrified, but you still fight back with your laser gun. The tentacle retreated.")
     (as-> player p
-      (update p :hp #(- % (+ (rand-int 5) 5)))
-      (update p :ls #(- % 5))))
-      ;;TODO rewrite with helper functions
+      (player/update-hp p #(- % (+ (rand-int 5) 5)))
+      (player/update-ls p #(- % 5))))
 
   (fn [player]
     (println "You see a trail of dust getting closer and closer. Something is running towards you.")
@@ -58,9 +58,7 @@
     (println "The running surf clam scares you. You shoot it with a laser gun, and it starts to attack you.")
     (println "It falls down and groans in despair. Then it dies. You restored some health from its flesh.")
     (as-> player p
-      (update p :hp #(+ % (+ 1 (rand-int 4))))))
-    ;;TODO rewrite with helper functions
-    ;;TODO cap hp at 100
+      (player/update-hp p #(+ % (+ 1 (rand-int 4))))))
    ]
   )
 
