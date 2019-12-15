@@ -43,14 +43,25 @@
   )
 
 (def monster-fns
+  [(fn [player]
+    (println "A giant tentacle suddenly reaches out of the ground and attacks you.")
+    (println "The tentacle was hiding inside a pit. The opening was covered by dirt, so you didn't notice.")
+    (println "You are horrified, but you still fight back with your laser gun. The tentacle retreated.")
+    (as-> player p
+      (update p :hp #(- % (+ (rand-int 5) 5)))
+      (update p :ls #(- % 5))))
+      ;;TODO rewrite with helper functions
+
   (fn [player]
-     (println "All of a sudden, a giant tentacle reaches out and attacks you.")
-     (println "Although you are horrified, you fought back with your laser gun.")
-     (println "The tentacle retreated.")
-     (as-> player p
-           (update p :hp #(- % (+ (rand-int 5) 5)))
-           (update p :ls #(- % 5)))
-   )
+    (println "You see a trail of dust getting closer and closer. Something is running towards you.")
+    (println "It seems like a gigantic surf calm, but with two strong legs supporting its tall, flat body.")
+    (println "The running surf calm scares you. You shoot it with a laser gun, and it starts to attack you.")
+    (println "It falls down and groans in despair. Then it dies. You restored some health from its flesh.")
+    (as-> player p
+      (update p :hp #(+ % (+ 1 (rand-int 4))))))
+    ;;TODO rewrite with helper functions
+    ;;TODO cap hp at 100
+   ]
   )
 
 (def observatory-one
