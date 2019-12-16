@@ -22,7 +22,7 @@
 ; A vector of events that can happen on normal tiles.
 (def normal-fns
   [(fn [player]
-    (println "You found a weird yellow flower on the ground. When you touched it, some king of liquid seeped out.")
+    (println "You found a weird yellow flower on the ground. When you touched it, some kind of liquid seeped out.")
     (println "The liquid proved not dangerous or harmful to you.")
     player)
   (fn [player]
@@ -81,7 +81,7 @@
 })
 
 ; Let the player explore the current tile.
-; Prints something and return new player status.
+; Prints something and returns new player status.
 (defn explore [player]
   (let [curr-tile (:tile player)
         tile-obj (curr-tile map/loc-obj-map)

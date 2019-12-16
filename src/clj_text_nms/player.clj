@@ -75,10 +75,13 @@
         (println "You already established a base on this tile!")
         (let [new-player (rmv-item player {:chro 25})]
             (if (nil? new-player)
-                (println "Establishing a base requires 25 chromatic metal. You do not have enough.")
+                (do
+                    (println "Establishing a base requires 25 chromatic metal. You do not have enough.")
+                    player
+                )
                 (do
                     (println "Success // You've established a base on this tile.")
-                    (update new-player :base-tiles #(conj % (:tile player)))
+                    (tick-planet (update new-player :base-tiles #(conj % (:tile player))))
                 )
             )
         )

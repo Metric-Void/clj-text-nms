@@ -124,7 +124,7 @@
                     )
                 (println text/options)
                 (let [input (read-with-inst)]
-                    (if (keyword? input)
+                    (if (symbol? input)
                         (case (cljstr/lower-case (subs (name input) 0 1))
                             "m" (recur (player/tick-planet (player/mine player)) true)
                             "s" (do
@@ -132,6 +132,7 @@
                                     (recur player false)
                                     )
                             "c" (recur (player/tick-planet (craft player)) true)
+                            "b" (recur (player/estab-base player) true)
                             "q" (println "See you again.")
                             (do (println "Invalid input.")
                                 (recur player false)

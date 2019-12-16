@@ -9,6 +9,7 @@
     [M]ine in this tile
     [S]ee your inventory
     [C]raft new items
+    [B]uild a base on this tile
     [Q]uit the game")
 
 (defn current-state
