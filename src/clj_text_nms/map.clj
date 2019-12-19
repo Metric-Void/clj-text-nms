@@ -43,6 +43,25 @@
   :t-3dba-xdab "Blorg-Rattenbury Grassland",
   :t-3dba-xaaa "Javorian Hills",
   :t-3dba-xeff "Rosamond Valley"
+  :t-3dba-xfda "Heath Cliff"
+})
+
+;;
+;;hill        valley      cliff
+;;
+;;grassland   lowland
+;;
+;;outpost     swamp
+;;
+
+(def loc-dir-map {
+  :t-3dba-xfce {:east :t-3dba-xbea, :south nil, :west nil, :north :t-3dba-xdab},
+  :t-3dba-xbea {:east nil, :south nil, :west :t-3dba-xfce, :north :t-3dba-xcaf},
+  :t-3dba-xcaf {:east nil, :south :t-3dba-xbea, :west :t-3dba-xdab, :north :t-3dba-xeff},
+  :t-3dba-xdab {:east :t-3dba-xcaf, :south :t-3dba-xfce, :west nil, :north :t-3dba-xaaa},
+  :t-3dba-xaaa {:east :t-3dba-xeff, :south :t-3dba-xdab, :west nil, :north nil},
+  :t-3dba-xeff {:east :t-3dba-xfda, :south :t-3dba-xcaf, :west :t-3dba-xaaa, :north nil},
+  :t-3dba-xfda {:east nil, :south nil, :west :t-3dba-xeff, :north nil}
 })
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
@@ -56,7 +75,7 @@
                             "This place seems to be full of flowers.\nFlowers on the ground are rich in oxygen."
                             {:carbon 3 :oxygen 4} {:mag-ferrite 3}))
 
-(def Mabiangra-II-III (Tile. :monster :p-3dba :p-3dba-xcaf nil
+(def Mabiangra-II-III (Tile. :monster :p-3dba :t-3dba-xcaf nil
                             "This is a dense forest.\nTrees grow so closely together that it is gloomy even at noon.\nThe fog that covers the depth of the forest forest makes it look creepier."
                             {:carbon 5 :oxygen 3 :paraff 2}
                             {:cond-carbon 5}))
@@ -73,6 +92,10 @@
                             "A small valley."
                             {:carbon 1 :oxygen 3 :ferrite-dust 2} {:mag-ferrite 1 :sic-pow 1}))
 
+(def Mabiangra-II-VII (Tile. :normal :p-3dba :t-3dba-xfda nil
+                            "A steep rock cliff.\nYou can see nothing here but stones."
+                            {:ferrite-dust 2} {:mag-ferrite 3 :sic-pow 3}))
+
 (def loc-obj-map {
   :p-3dba Mabiangra-II
   :t-3dba-xfce Mabiangra-II-I
@@ -81,6 +104,7 @@
   :t-3dba-xdab Mabiangra-II-IV
   :t-3dba-xaaa Mabiangra-II-V
   :t-3dba-xeff Mabiangra-II-VI
+  :t-3dba-xfda Mabiangra-II-VII
 })
 
 (defn describe-planet [planet]
