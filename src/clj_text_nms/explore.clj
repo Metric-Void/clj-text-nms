@@ -66,8 +66,7 @@
     (println "It falls down and groans in despair. Then it dies. You restored some health from its flesh.")
     (as-> player p
       (player/update-hp p #(+ % (+ 1 (rand-int 4))))))
-   ]
-  )
+   ])
 
 (def exotic-fns [
   (fn [player]
@@ -77,16 +76,17 @@
   (fn [player]
     (println "You found some eggs on the ground. Is it the only life on here?")
     (println "As you tried to examine it, Creatures appeared under the eggs.")
-    (println "They're the biological horrors. ")
-    player
+    (println "They're called the biological horrors. They can survive anywhere.")
+    (println "They screamed and plunged at you. You fled as fast as you could.")
+    (player/update-hp player #(- % 10))
   )
 ])
+
 (def observatory-one
   [(fn [player]
       (println "The terminal in the observatory was not logged out by the last user.")
-      (println "You retrieved a location data from it.")
-      ; TODO - Add a tile.
-      player
+      (println "You retrieved a location data from it. Where would it lead to?")
+      (update player :map-locs #(conj % :t-59aa-x2bc))
     )
    (fn [player]
      (println "You found a curiousity in the observatory!")
@@ -96,6 +96,28 @@
      )
    ]
   )
+
+(def fortress
+  [(fn [player]
+    (println "The place turns out to be the last fortress of an alien civilization.")
+    (println "Here the survivals of this species spent their final days.")
+    (println "You do not know exactly what difficulties they encountered.")
+    (println "There are some remaining supplies. The food is still edible!")
+    (println "It tastes like dirt, but restored some HP.")
+    (-> player
+      (add-item {:silver 36, :gold 23, :platinum 17, :io-cob 32, :met-plate 8, :dih-gel 5, :c-tube 3, :h-seal 2})
+      (player/update-hp #(+ % 10))
+      ;;todo set flag
+    ))
+   (fn [player]
+    (println "You find a way into the deepest part of the fortress and see a laboratory.")
+    (println "There is a dark dodecahedron box on the table. It seems unbreakable.")
+    (println "Luckily, it is open. You look inside and find an intricate circuit.")
+    (println "It seems to be able to generate a force field around the box.")
+    (add-item player {:emag-casing 1}))
+   ]
+  )
+
 
 (def korvax-at-mii-vi [
   (fn [player]
@@ -178,9 +200,68 @@
   )
 ])
 
+(def talandra-v-iv [
+  (fn [player]
+    (println "This iceburg have something glowing inside.")
+    (println "A friendly animal passing by brought you life support")
+    (println "She looks like a deer, but with much thicker fur.")
+    (player/update-ls player #(+ % 50))
+  )
+  (fn [player]
+    (println "You tried to dig to the center of the iceburg.")
+    (println "The light became brighter and brigher. You can't see what's inside")
+    (println "The temperature is also getting unbelievably cold. Your exosuit is struggling.")
+    (println "When you reached the center, you've drained almost all your life support.")
+    (println "The light seems to come from a curiousity: Condensed Photon.")
+    (println "Nobody knows why photon can be condensed, but here it is in an iceburg.")
+    (println "You picked it up very carefully.")
+    (as-> player p
+      (player/update-ls p #(- % 50))
+      (add-item p {:condens-photon 1})
+    )
+  )
+])
+(def nudryorob-v [
+  (fn [player]
+    (println "You found a metal plating penetrating out of the ground.")
+    (println "It is clearly an artificial object.")
+    (println "Your instinct is telling you to go further.")
+    player
+  )
+  (fn [player]
+    (println "As you dug down, you saw a telescope and a dome.")
+    (println "This place used to be an observatory. They carry a record of all stellar objects.")
+    (println "You retrieved an exclusive item, Record of the stars.")
+    (add-item player {:stars-record 1})
+  )
+])
+
+(def umis-iii [
+  (fn [player]
+    (println "You chatted with the Gek owner of the trading outpost.")
+    (println "This outpost had a long history, and it has been passed by several generations.")
+    (println "They're maintaining some historical, important trade routes.")
+    (println "He gave you a curiosity, a time capsule as a present.")
+    (add-item player {:time-capsule 1})
+  )
+])
+
+(def umis-iv [
+  (fn [player]
+    (println "This is a Vy-Keen production facility, a weird sight")
+    (println "since most creatures think they only know about wars.")
+    (println "This facility is making antimatter for starship hyperdrives")
+    (println "But they just found a better method than colliding particles")
+    (println "So they're getting rid of old particle colliders.")
+    (println "You got the curiosity: Particle Collider!")
+    (add-item player {:part-collider 1})
+  )
+])
+
 (def env-vec-map {
   :normal normal-fns
   :monster monster-fns
+  :exotic exotic-fns
 })
 
 (def explore-functions {
@@ -190,7 +271,10 @@
     :cliff-at-mii-vii cliff-at-mii-vii
     :luvocious-i-ii luvocious-i-ii
     :luvocious-i-iv luvocious-i-iv
-    ; TODO
+    :nudryorob-v nudryorob-v
+    :talandra-v-iv talandra-v-iv
+    :umis-iii umis-iii
+    :umis-iv umis-iv
 })
 
 ; Let the player explore the current tile.

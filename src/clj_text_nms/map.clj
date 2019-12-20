@@ -13,6 +13,7 @@
   :oxygen "Oxygen",
   :ferrite-dust "Ferrite Dust",
   :paraff "Paraffinium",
+  :sic-pow "Silicon Powder"
   :cond-carbon "Condensed Carbon",
   :mag-ferrite "Magnetized Ferrite",
   :cob "Cobalt",
@@ -32,25 +33,25 @@
   :dih-gel "Di-Hydrogen Gel",
   :c-tube "Carbon Nanotube",
   :h-seal "Hermetic Seal",
-  :nanode-shell "Nanode Enclosure",                         ;Curiousity 1
+  :nanode-shell "Nanode Enclosure",                         ;Curiousity 1 - observ-1
   :captured-nanode "Captured Nanode",
-  :light-of-night "Light of Night",                         ;Curiousity 2
+  :light-of-night "Light of Night",                         ;Curiousity 2 - luvi-i-ii
   :englobed-shade "Englobed Shade",
   :noospheric-gel "Noospheric Gel",                         ;Curiousity 3
   :noospheric-orb "Noospheric Orb",
-  :emag-casing "Dark Matter Casing",                        ;Curiousity 4
+  :emag-casing "Dark Matter Casing",                        ;Curiousity 4 - tal-v-iii
   :dark-matter "Dark Matter",
-  :part-collider "Particle Collider",                       ;Curiousity 5
+  :part-collider "Particle Collider",                       ;Curiousity 5 - umis-iv
   :dawns-end "Dawn's end",
-  :condens-photon "Condensed Photon",                       ;Curiousity 6
+  :condens-photon "Condensed Photon",                       ;Curiousity 6 - tal-v-iv
   :photic-jade "Photic Jade"
-  :async-obj  "Asynchronous Exciter"                        ;Curiousity 7
+  :async-obj  "Asynchronous Exciter"                        ;Curiousity 7 - luv-i-iv
   :state-phasure "State Phasure"
-  :stars-record "Record of the stars"                       ;Curiousity 8
+  :stars-record "Record of the stars"                       ;Curiousity 8 - nud-v
   :novae-reclaiment "Novae Reclaiment"
-  :sim-record "Simulation Record"                           ;Curiousity 9
+  :sim-record "Simulation Record"                           ;Curiousity 9 - korvax-mii-vi
   :modified-quanta "Modified Quanta"
-  :time-capsule "Time Capsule"                              ;Curiousity 10
+  :time-capsule "Time Capsule"                              ;Curiousity 10 - umis-iii
   :heart-of-the-sun "Heart of the Sun"                      ;Final goal
 })
 
@@ -78,6 +79,23 @@
   :t-9a3e-xc4d "Ewwessalic Grassland"
   :t-9a3e-xbd2 "Ebatus Pit"
   :t-9a3e-x67e "Rhyfordias Terminus"
+  :p-5fec "Talandra"
+  :t-5fec-xaac "Shariat Cliff"
+  :t-5fec-xbee "Gorfis Tundra"
+  :t-5fec-xdec "Nova Constantinople"
+  :t-5fec-xdda "Tolkien Glacier"
+  :t-59aa "Nudryorob"
+  :t-59aa-e4d2 "Luknati Plain"
+  :t-59aa-ca57 "Emkinses Plain"
+  :t-59aa-xadf "Ackladesh Plain"
+  :t-59aa-xbdf "Ryoinc Plain"
+  :t-59aa-x2bc "Ihamija Plateau"
+  :p-2ea1 "Umis"
+  :t-2ea1-x9bc "Amnaco Swamp"
+  :t-2ea1-x4a3 "Yamabe Desert"
+  :t-2ea1-x67f "Ilnyoti Plain"
+  :t-2ea1-x3db "Podimi Valley"
+  :t-2ea1-xbc2 "Srbija Mounts"
 })
 
 ;;
@@ -89,20 +107,44 @@
 ;;
 
 (def loc-dir-map {
-  :t-3dba-xfce {:east :t-3dba-xbea, :south nil, :west nil, :north :t-3dba-xdab},
-  :t-3dba-xbea {:east nil, :south nil, :west :t-3dba-xfce, :north :t-3dba-xcaf},
-  :t-3dba-xcaf {:east nil, :south :t-3dba-xbea, :west :t-3dba-xdab, :north :t-3dba-xeff},
-  :t-3dba-xdab {:east :t-3dba-xcaf, :south :t-3dba-xfce, :west nil, :north :t-3dba-xaaa},
-  :t-3dba-xaaa {:east :t-3dba-xeff, :south :t-3dba-xdab, :west nil, :north nil},
-  :t-3dba-xeff {:east :t-3dba-xfda, :south :t-3dba-xcaf, :west :t-3dba-xaaa, :north nil},
+  :t-3dba-xfce {:east :t-3dba-xbea, :south nil, :west nil, :north :t-3dba-xdab}
+  :t-3dba-xbea {:east nil, :south nil, :west :t-3dba-xfce, :north :t-3dba-xcaf}
+  :t-3dba-xcaf {:east nil, :south :t-3dba-xbea, :west :t-3dba-xdab, :north :t-3dba-xeff}
+  :t-3dba-xdab {:east :t-3dba-xcaf, :south :t-3dba-xfce, :west nil, :north :t-3dba-xaaa}
+  :t-3dba-xaaa {:east :t-3dba-xeff, :south :t-3dba-xdab, :west nil, :north nil}
+  :t-3dba-xeff {:east :t-3dba-xfda, :south :t-3dba-xcaf, :west :t-3dba-xaaa, :north nil}
   :t-3dba-xfda {:east nil, :south nil, :west :t-3dba-xeff, :north nil}
   :t-9a3e-xc4d {:east :t-9a3e-x67e :north :t-9a3e-xfe4}
   :t-9a3e-x67e {:west :t-9a3e-xc4d :north :t-9a3e-xbd2}
   :t-9a3e-xfe4 {:south :t-9a3e-xc4d :east :t-9a3e-xbd2}
   :t-9a3e-xbd2 {:south :t-9a3e-x67e :west :t-9a3e-xfe4}
+  :t-5fec-xaac {:east nil, :south :t-5fec-xdec, :west nil, :north nil}
+  :t-5fec-xbee {:east nil, :south nil, :west :t-5fec-xdec, :north nil}
+  :t-5fec-xdec {:east :t-5fec-xbee, :south :t-5fec-xdda, :west nil, :north :t-5fec-xaac}
+  :t-5fec-xdda {:east nil, :south nil, :west nil, :north :t-5fec-xdec}
+  :t-59aa-e4d2 {:west :t-59aa-ca57 :east :t-59aa-xadf :south :t-59aa-x2bc}
+  :t-59aa-ca57 {:east :t-59aa-e4d2}
+  :t-59aa-xadf {:west :t-59aa-e4d2 :south :t-59aa-xbdf}
+  :t-59aa-xbdf {:north :t-59aa-xadf :west :t-59aa-x2bc}
+  :t-59aa-x2bc {:north :t-59aa-e4d2 :east :t-59aa-xbdf}
+  :t-2ea1-x9bc {:east :t-2ea1-x4a3}
+  :t-2ea1-x4a3 {:west :t-2ea1-x9bc :south :t-2ea1-x67f}
+  :t-2ea1-x67f {:north :t-2ea1-x4a3 :south :t-2ea1-xbc2}
+  :t-2ea1-x3db {:west :t-2ea1-xbc2}
+  :t-2ea1-xbc2 {:north :t-2ea1-x67f :east :t-2ea1-x3db}
 })
 
-(def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
+(def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 2))
+
+(def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet" 65.6 0.1 0.1 4))
+
+(def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere" 32.0 0.1 0.1 5))
+
+(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -40.0 0.1 0.1 4))
+
+(def Umis (Planet. :rad :g-lkx :p-2ea1 "A radioactive planet" 20.0 6.3 0.3 4))
+
+(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
 
 (def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory-one
                            "An open ground with a Gek Observatory in the center.\nYou can see lots of plants around, but no animals.\nRocks on the ground seems to be rich of ferrite."
@@ -115,8 +157,7 @@
 
 (def Mabiangra-II-III (Tile. :monster :p-3dba :p-3dba-xcaf :none
                             "This is a dense forest.\nTrees grow so closely together that it is gloomy even at noon.\nThe fog that covers the depth of the forest forest makes it look creepier."
-                            {:carbon 5 :oxygen 3 :paraff 2}
-                            {:cond-carbon 5}))
+                            {:carbon 5 :oxygen 3 :paraff 2} {:cond-carbon 5}))
 
 (def Mabiangra-II-IV (Tile. :normal :p-3dba :t-3dba-xdab :none
                             "An open grassland close to waters, with no trees or buildings in sight.\nPlants contain carbon and oxygen."
@@ -132,9 +173,7 @@
 
 (def Mabiangra-II-VII (Tile. :normal :p-3dba :t-3dba-xfda :cliff-at-mii-vii
                             "A steep rock cliff.\nYou can see nothing here but stones."
-                            {:ferrite-dust 2 :gold 2 :sic-pow 3} {:mag-ferrite 3}))
-
-(def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet" 65.6 0.1 0.1 8))
+                            {:ferrite-dust 2 :sic-pow 3} {:gold 2 :mag-ferrite 3}))
 
 (def Luvocious-I-I (Tile. :normal :p-9a3e :t-9a3e-xfe4 :none
                            "A desert. The sands are even too hot to stand on."
@@ -142,33 +181,72 @@
 
 (def Luvocious-I-II (Tile. :normal :p-9a3e :t-9a3e-xc4d :luvocious-i-ii
                            "A flatland with lots of plants. They all have small leaves and a red stem."
-                           {:carbon 5 :sulfur 1 :oxygen 3 :cu 1} {:mag-ferrite 2}))
+                           {:carbon 5 :sulfur 1 :oxygen 3} {:cu 1 :mag-ferrite 2}))
 
 (def Luvocious-I-III (Tile. :normal :p-9a3e :t-9a3e-xbd2 :none
                             "An underground cave. Some weird plants are generating weird gas."
-                            {:cu 3, :ammo 1, :sic-pow 2, :carbon 3, :oxygen 2} {:cob 2}))
+                            {:ammo 1, :sic-pow 2, :carbon 3, :oxygen 2} {:cu 3, :cob 2}))
 
 (def Luvocious-I-IV (Tile. :normal :p-9a3e :t-9a3e-x67e :luvocious-i-iv
                            "A Korvax Transmission Tower stands at the center of a midland."
                            {:sulfur 3 :carbon 2 :oxygen 2 :sic-pow 1} {:cob 2 :mag-ferrite 2}))
 
-(def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere" 32.0 0.1 0.1 10))
-
-(def Nudryorob-I (Tile. :normal :p-59aa :t-59aa-e4d2 :none
+(def Nudryorob-I (Tile. :exotic :p-59aa :t-59aa-e4d2 :none
                  "Barren Land with absolutely no sign of life.\nGround looks yellowish."
-                 {:gold 3 :silver 2 :cu 3 :platinum 1 :cob 2} {:gold 2 :cu 3}))
+                 {:ferrite-dust 5 :cu 2} {:gold 3 :silver 2 :cu 3 :platinum 1 :cob 2}))
 
-(def Nudryorob-II (Tile. :normal :p-59aa :t-59aa-ca57 :none
+(def Nudryorob-II (Tile. :exotic :p-59aa :t-59aa-ca57 :none
                   "Barren Land with absolutely no sign of life.\nGround looks silverish."
-                  {:gold 2 :silver 4 :cu 1 :platinum 3 :cob 2} {:silver 2 :platinum 2}))
+                  {:ferrite-dust 5} {:gold 2 :silver 4 :cu 1 :platinum 3 :cob 2}))
 
-(def Nudryorob-III (Tile. :normal :p-59aa :t-59aa-xadf :none
+(def Nudryorob-III (Tile. :exotic :p-59aa :t-59aa-xadf :none
                   "Barren Land with absoultely no sign of life.\nMost of the rocks have turned to dust."
-                  {:ferrite-dust 5 :cu 2 :gold 1 :silver 1 :cob 1} {:platinum 2 :mag-ferrite 2}))
+                  {:ferrite-dust 5 :di-hydro 2} {:cu 2 :gold 1 :silver 1 :cob 1 :platinum 2 :mag-ferrite 2}))
 
-(def Nudryorob-IV (Tile. :normal :p-59aa :t-59aa-xbdf :none
+(def Nudryorob-IV (Tile. :exotic :p-59aa :t-59aa-xbdf :none
                   "Barren Land with absoultely no sign of life.\nGround have traces of high temperature"
-                  {:carbon 3 :cu 1 :gold 1 :silver 1} {:chro 2 :mag-ferrite 1 :io-cob 3}))
+                  {:carbon 3 :chro 2} { :cu 1 :gold 1 :silver 1 :mag-ferrite 1 :io-cob 3}))
+
+(def Nudryorob-V (Tile. :exotic :p-59aa :t-59aa-x2bc :nudryorob-v
+                        "Barrend Land on a high mountain, with a great view of the stars."
+                        {:cu 2 :gold 3 :silver 3 :cob 2 :ferrite-dust 2} {:platinum 3 :io-cob 2}))
+
+(def Talandra-V-I (Tile. :normal :p-5fec :t-5fec-xaac :none
+                            "A rock cliff covered by ice."
+                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow 1}))
+
+(def Talandra-V-II (Tile. :normal :p-5fec :t-5fec-xbee :none
+                            "A tundra landscape. Only moss and lichen grows here"
+                            {:carbon 1 :co2 2 :ferrite-dust 1} {:sic-pow 1}))
+
+(def Talandra-V-III (Tile. :normal :p-5fec :t-5fec-xdec :fortress
+                            "An open ground with a huge man-made structure in the center.\nIt seems to be a shelter, but was deserted a long time ago.\nYou don't know who built it or what it was for."
+                            {:co2 1 :ferrite-dust 3} {}))
+
+(def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :none
+                            "A glacier made of pure ice."
+                            {:co2 5} {:sic-pow 2}))
+
+(def Umis-I (Tile. :normal :p-2ea1 :t-2ea1-x9bc :none
+                   "Maybe a grassland, but you hestitate to call these plants \"grass\"."
+                   {:carbon 3 :ura 2 :ferrite-dust 2 :oxygen 2 :di-hydro 3} {:mag-ferrite 2}))
+
+(def Umis-II (Tile. :normal :p-2ea1 :t-2ea1-x4a3 :none
+                   "A plain desert, with dount-shaped ores in the middle."
+                   {:ferrite-dust 5 :ura 5 :carbon 3 :oxygen 2} {:mag-ferrite 5}))
+
+(def Umis-III (Tile. :normal :p-2ea1 :t-2ea1-x67f :umis-iii
+                     "A trading outpost. Would anyone ever arrive here, given the radiation?"
+                     {:ferrite-dust 2 :ura 2 :carbon 2 :oxygen 2 :sic-pow 2} {:mag-ferrite 1}))
+
+(def Umis-IV (Tile. :normal :p-2ea1 :t-2ea1-x3db :umis-iv
+                    "A research facility. Looks like this station is still staffed."
+                    {:ura 2 :oxygen 2 :carbon 1 :sic-pow 1 :di-hydro 2} {:mag-ferrite 1}))
+
+(def Umis-V (Tile. :normal :p-2ea1 :t-2ea1-xbc2 :none
+                   "A rocky terrain, surrounded by mountains. There're lots of shiny minerals on the cliff."
+                   {:ferrite-dust 5 :ura 5 :carbon 2 :sic-pow 5 :di-hydro 2}
+                   {:silver 2 :gold 2 :mag-ferrite 2}))
 
 (def loc-obj-map {
   :p-3dba Mabiangra-II
@@ -189,15 +267,31 @@
   :t-59aa-ca57 Nudryorob-II
   :t-59aa-xadf Nudryorob-III
   :t-59aa-xbdf Nudryorob-IV
+  :t-59aa-x2bc Nudryorob-V
+  :p-5fec Talandra-V
+  :t-5fec-xaac Talandra-V-I
+  :t-5fec-xbee Talandra-V-II
+  :t-5fec-xdec Talandra-V-III
+  :t-5fec-xdda Talandra-V-IV
+  :p-2ea1 Umis
+  :t-2ea1-x9bc Umis-I
+  :t-2ea1-x4a3 Umis-II
+  :t-2ea1-x67f Umis-III
+  :t-2ea1-x3db Umis-IV
+  :t-2ea1-xbc2 Umis-V
 })
 
 (def planet-map {
     :p-3dba [:t-3dba-xfce :t-3dba-xbea :t-3dba-xcaf :t-3dba-xdab :t-3dba-xaaa :t-3dba-xeff :t-3dba-xfda]
     :p-9a3e [:t-9a3e-xfe4 :t-9a3e-xc4d :t-9a3e-xbd2 :t-9a3e-x67e]
+    :p-59aa [:t-59aa-xadf :t-59aa-e4d2 :t-59aa-ca57 :t-59aa-x2bc :t-59aa-xbdf]
+    :p-5fec [:t-5fec-xaac :t-5fec-xbee :t-5fec-xdec :t-5fec-xdda]
+    :p-2ea1 [:t-2ea1-x3db :t-2ea1-x4a3 :t-2ea1-x9bc :t-2ea1-x67f :t-2ea1-xbc2]
 })
 
 (def tiles-with-exclusive #{
   :t-3dba-xfce :t-3dba-xeff :t-9a3e-xc4d :t-9a3e-x67e
+  :t-59aa-x2bc :p-5fec-xdda :p-5fec-xdec :t-2ea1-x67f :t-2ea1-x3db
 })
 
 (defn describe-planet [planet]
