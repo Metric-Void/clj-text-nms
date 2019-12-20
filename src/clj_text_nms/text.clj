@@ -4,6 +4,8 @@
     (:require [clj-text-nms.logic :as logic]))
 
 (def options "    [S]can this territory
+    [E]xplore this territory
+    [G]o to another tile
     [M]ine in this tile
     [V]iew your inventory
     [C]raft new items
@@ -126,6 +128,13 @@
 (defn msg-teleport-dest
     [player]
     nil
+    )
+
+(def msg-move "You can go
+    [N]orth
+    [W]est
+    [S]outh
+    [E]ast"
     )
 
 (def op (str

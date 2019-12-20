@@ -1,5 +1,6 @@
 (ns clj-text-nms.repl
     (:gen-class)
+    (:require [clj-text-nms.explore :as explore])
     (:require [clj-text-nms.player :as player])
     (:require [clj-text-nms.logic :as logic])
     (:require [clj-text-nms.text :as text])
@@ -114,6 +115,21 @@
     [player false]
     )
 
+(defn move
+    [player]
+    (do
+        (println text/msg-move)
+        (let [input (read-with-inst)]
+            (case (cljstr/lower-case (subs (name input) 0 1))
+                "n" (player/move player :north)
+                "w" (player/move player :west)
+                "s" (player/move player :south)
+                "e" (player/move player :east)
+                )
+            )
+        )
+    )
+
 (defn new-game
     []
     (do (println text/op)
@@ -144,6 +160,11 @@
                                     (player/scan player)
                                     (recur (player/tick-planet player) true)
                                     )
+                            "e" (do
+                                    (println text/dividing-line)
+                                    (recur (player/tick-planet (explore/explore player)) true)
+                                    )
+                            "g" (recur (player/tick-planet (move player)) true)
                             "m" (recur (player/tick-planet (player/mine player)) true)
                             "v" (do
                                     (println (text/msg-inventory player))
