@@ -6,7 +6,19 @@
 (declare add-item)
 (declare rmv-item)
 
-; A record for lethe player.
+; A record for the spaceship owned by the player
+; fuel - fuel level, from 0 to 100
+; tile - ship location
+(defrecord Spaceship [fuel tile])
+
+(defn new-spaceship []
+    "Initialize a new spaceship"
+    (Spaceship. 100 :t-3dba-xfce))
+    
+; Update :fuel of spaceship inside player. This function ensures fuel is between 0 and 100.
+(defn update-ship-fuel [player ifn] (update-in player [:ship :fuel] (fn [v] (-> v (#(min 100 (max 0 %))) (ifn)))))
+
+; A record for the player.
 ; HP - Health Points
 ; LS - Life Support
 ; galaxy - His current Galaxy
@@ -15,11 +27,11 @@
 ; inventory - His inventory
 ; adv-laster - Whether the player have got advanced laser.
 ; ship-tile - The location of the player's Spaceship.
-(defrecord Player [hp ls galaxy planet tile inventory adv-laser ship-tile map-locs base-tiles])
+(defrecord Player [hp ls galaxy planet tile inventory adv-laser ship map-locs base-tiles])
 
 (defn new-player []
     "Initialize a new player"
-    (Player. 100 100 :g-lkx :p-3dba :t-3dba-xfce (hash-map) false :t-3dba-xfce #{} #{}))
+    (Player. 100 100 :g-lkx :p-3dba :t-3dba-xfce (hash-map) false (new-spaceship) #{:t-3dba-xfce} #{}))
 
 ; Modifies the player's life support according to the current planet.
 ; If life support is zero, decrease player's HP by 10.
@@ -108,10 +120,16 @@
 
 ; Teleport to a location on the map
 ; Both tile and planet will be changed.
-; Starship does not follow the player
+; Starship follows the player
+; newtile destination specified by player
+; returns player
 (defn teleport [player newtile]
-    (assoc player :tile newtile :planet (:planet (newtile map/loc-obj-map)))
-)
+    (cond (nil? ((:map-locs player) newtile)) player
+        (not (= (:tile player) (:tile (:ship player)))) player
+        (< (:fuel (:ship player)) 25) player
+        :else (-> player (assoc :tile newtile :planet (:planet (newtile map/loc-obj-map)))
+                    (assoc-in [:ship :tile] newtile)
+                    (update-ship-fuel #(- % 25)))))
 
 ; Interactive command, recharge Life Support.
 ; Returns new player status.
