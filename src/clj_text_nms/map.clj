@@ -73,6 +73,11 @@
   :t-3dba-xaaa "Javorian Hills",
   :t-3dba-xeff "Rosamond Valley"
   :t-3dba-xfda "Heath Cliff"
+  :p-9a3e  "Luvocious-I"
+  :t-9a3e-xfe4 "Amlinf-Hii Desert"
+  :t-9a3e-xc4d "Ewwessalic Grassland"
+  :t-9a3e-xbd2 "Ebatus Pit"
+  :t-9a3e-x67e "Rhyfordias Terminus"
 })
 
 ;;
@@ -91,6 +96,10 @@
   :t-3dba-xaaa {:east :t-3dba-xeff, :south :t-3dba-xdab, :west nil, :north nil},
   :t-3dba-xeff {:east :t-3dba-xfda, :south :t-3dba-xcaf, :west :t-3dba-xaaa, :north nil},
   :t-3dba-xfda {:east nil, :south nil, :west :t-3dba-xeff, :north nil}
+  :t-9a3e-xc4d {:east :t-9a3e-x67e :north :t-9a3e-xfe4}
+  :t-9a3e-x67e {:west :t-9a3e-xc4d :north :t-9a3e-xbd2}
+  :t-9a3e-xfe4 {:south :t-9a3e-xc4d :east :t-9a3e-xbd2}
+  :t-9a3e-xbd2 {:south :t-9a3e-x67e :west :t-9a3e-xfe4}
 })
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
@@ -110,8 +119,8 @@
                             {:cond-carbon 5}))
 
 (def Mabiangra-II-IV (Tile. :normal :p-3dba :t-3dba-xdab :none
-                            "An open grassland, with no trees or buildings in sight.\nPlants contain carbon and oxygen."
-                            {:carbon 2 :di-hydro 1 :oxygen 2 :ferrite-dust 3} {:sic-pow 2}))
+                            "An open grassland close to waters, with no trees or buildings in sight.\nPlants contain carbon and oxygen."
+                            {:carbon 2 :di-hydro 1 :oxygen 2 :ferrite-dust 3 :sic-pow 2} {:cl 3}))
 
 (def Mabiangra-II-V (Tile. :normal :p-3dba :t-3dba-xaaa :none
                             "A beautiful hilly landscape. Small traces of shiny stuff can be seen on the mountains."
@@ -119,11 +128,29 @@
 
 (def Mabiangra-II-VI (Tile. :normal :p-3dba :t-3dba-xeff :korvax-at-mii-vi
                             "A small valley with a Korvax research center close to waters.\nA huge device sits at the middle of the building."
-                            {:carbon 1 :oxygen 3 :ferrite-dust 2} {:mag-ferrite 1 :sic-pow 1}))
+                            {:carbon 1 :oxygen 3 :ferrite-dust 2 :sic-pow 1} {:mag-ferrite 2}))
 
-(def Mabiangra-II-VII (Tile. :normal :p-3dba :t-3dba-xfda :none
+(def Mabiangra-II-VII (Tile. :normal :p-3dba :t-3dba-xfda :cliff-at-mii-vii
                             "A steep rock cliff.\nYou can see nothing here but stones."
-                            {:ferrite-dust 2} {:mag-ferrite 3 :sic-pow 3}))
+                            {:ferrite-dust 2 :gold 2 :sic-pow 3} {:mag-ferrite 3}))
+
+(def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet" 65.6 0.1 0.1 8))
+
+(def Luvocious-I-I (Tile. :normal :p-9a3e :t-9a3e-xfe4 :none
+                           "A desert. The sands are even too hot to stand on."
+                           {:sulfur 3 :carbon 1 :oxygen 1 :sic-pow 3 :cu 1} {:cob 2}))
+
+(def Luvocious-I-II (Tile. :normal :p-9a3e :t-9a3e-xc4d :luvocious-i-ii
+                           "A flatland with lots of plants. They all have small leaves and a red stem."
+                           {:carbon 5 :sulfur 1 :oxygen 3 :cu 1} {:mag-ferrite 2}))
+
+(def Luvocious-I-III (Tile. :normal :p-9a3e :t-9a3e-xbd2 :none
+                            "An underground cave. Some weird plants are generating weird gas."
+                            {:cu 3, :ammo 1, :sic-pow 2, :carbon 3, :oxygen 2} {:cob 2}))
+
+(def Luvocious-I-IV (Tile. :normal :p-9a3e :t-9a3e-x67e :luvocious-i-iv
+                           "A Korvax Transmission Tower stands at the center of a midland."
+                           {:sulfur 3 :carbon 2 :oxygen 2 :sic-pow 1} {:cob 2 :mag-ferrite 2}))
 
 (def loc-obj-map {
   :p-3dba Mabiangra-II
@@ -134,10 +161,15 @@
   :t-3dba-xaaa Mabiangra-II-V
   :t-3dba-xeff Mabiangra-II-VI
   :t-3dba-xfda Mabiangra-II-VII
+  :p-9a3e Luvocious-I
+  :t-9a3e-xfe4 Luvocious-I-I
+  :t-9a3e-xc4d Luvocious-I-II
+  :t-9a3e-xbd2 Luvocious-I-III
+  :t-9a3e-x67e Luvocious-I-IV
 })
 
 (def tiles-with-exclusive #{
-  :t-3dba-xfce :t-3dba-xeff
+  :t-3dba-xfce :t-3dba-xeff :t-9a3e-xc4d :t-9a3e-x67e
 })
 
 (defn describe-planet [planet]
