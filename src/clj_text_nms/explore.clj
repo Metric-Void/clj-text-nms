@@ -66,8 +66,7 @@
     (println "It falls down and groans in despair. Then it dies. You restored some health from its flesh.")
     (as-> player p
       (player/update-hp p #(+ % (+ 1 (rand-int 4))))))
-   ]
-  )
+   ])
 
 (def exotic-fns [
   (fn [player]
@@ -77,16 +76,17 @@
   (fn [player]
     (println "You found some eggs on the ground. Is it the only life on here?")
     (println "As you tried to examine it, Creatures appeared under the eggs.")
-    (println "They're the biological horrors. ")
-    player
+    (println "They're called the biological horrors. They can survive anywhere.")
+    (println "They screamed and plunged at you. You fled as fast as you could.")
+    (player/update-hp player #(- % 10))
   )
 ])
+
 (def observatory-one
   [(fn [player]
       (println "The terminal in the observatory was not logged out by the last user.")
-      (println "You retrieved a location data from it.")
-      ; TODO - Add a tile.
-      player
+      (println "You retrieved a location data from it. Where would it lead to?")
+      (update player :map-locs #(conj % :t-59aa-x2bc))
     )
    (fn [player]
      (println "You found a curiousity in the observatory!")
@@ -178,9 +178,25 @@
   )
 ])
 
+(def nudryorob-v [
+  (fn [player]
+    (println "You found a metal plating penetrating out of the ground.")
+    (println "It is clearly an artificial object.")
+    (println "Your instinct is telling you to go further.")
+    player
+  )
+  (fn [player]
+    (println "As you dug down, you saw a telescope and a dome.")
+    (println "This place used to be an observatory. They carry a record of all stellar objects.")
+    (println "You retrieved an exclusive item, Record of the stars.")
+    {add-item player {:stars-record 1}}
+  )
+])
+
 (def env-vec-map {
   :normal normal-fns
   :monster monster-fns
+  :exotic exotic-fns
 })
 
 (def explore-functions {
@@ -190,6 +206,7 @@
     :cliff-at-mii-vii cliff-at-mii-vii
     :luvocious-i-ii luvocious-i-ii
     :luvocious-i-iv luvocious-i-iv
+    :nudryorob-v nudryorob-v
     ; TODO
 })
 

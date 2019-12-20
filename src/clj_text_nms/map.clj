@@ -13,6 +13,7 @@
   :oxygen "Oxygen",
   :ferrite-dust "Ferrite Dust",
   :paraff "Paraffinium",
+  :sic-pow "Silicon Powder"
   :cond-carbon "Condensed Carbon",
   :mag-ferrite "Magnetized Ferrite",
   :cob "Cobalt",
@@ -83,6 +84,12 @@
   :p-5fec-xbee "Gorfis Tundra"
   :p-5fec-xdec "Nova Constantinople"
   :p-5fec-xdda "Tolkien Glacier"
+  :p-59aa "Nudryorob"
+  :t-59aa-e4d2 "Luknati Plain"
+  :t-59aa-ca57 "Emkinses Plain"
+  :t-59aa-xadf "Ackladesh Plain"
+  :t-59aa-xbdf "Ryoinc Plain"
+  :t-59aa-x2bc "Ihamija Plateau"
 })
 
 ;;
@@ -113,6 +120,10 @@
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
 
+(def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet" 65.6 0.1 0.1 8))
+
+(def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere" 32.0 0.1 0.1 10))
+
 (def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory-one
                            "An open ground with a Gek Observatory in the center.\nYou can see lots of plants around, but no animals.\nRocks on the ground seems to be rich of ferrite."
                            {:carbon 5 :di-hydro 3 :oxygen 3 :ferrite-dust 5 :paraff 2}
@@ -124,8 +135,7 @@
 
 (def Mabiangra-II-III (Tile. :monster :p-3dba :p-3dba-xcaf :none
                             "This is a dense forest.\nTrees grow so closely together that it is gloomy even at noon.\nThe fog that covers the depth of the forest forest makes it look creepier."
-                            {:carbon 5 :oxygen 3 :paraff 2}
-                            {:cond-carbon 5}))
+                            {:carbon 5 :oxygen 3 :paraff 2} {:cond-carbon 5}))
 
 (def Mabiangra-II-IV (Tile. :normal :p-3dba :t-3dba-xdab :none
                             "An open grassland close to waters, with no trees or buildings in sight.\nPlants contain carbon and oxygen."
@@ -143,8 +153,6 @@
                             "A steep rock cliff.\nYou can see nothing here but stones."
                             {:ferrite-dust 2 :gold 2 :sic-pow 3} {:mag-ferrite 3}))
 
-(def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet" 65.6 0.1 0.1 8))
-
 (def Luvocious-I-I (Tile. :normal :p-9a3e :t-9a3e-xfe4 :none
                            "A desert. The sands are even too hot to stand on."
                            {:sulfur 3 :carbon 1 :oxygen 1 :sic-pow 3 :cu 1} {:cob 2}))
@@ -161,23 +169,25 @@
                            "A Korvax Transmission Tower stands at the center of a midland."
                            {:sulfur 3 :carbon 2 :oxygen 2 :sic-pow 1} {:cob 2 :mag-ferrite 2}))
 
-(def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere" 32.0 0.1 0.1 10))
-
-(def Nudryorob-I (Tile. :normal :p-59aa :t-59aa-e4d2 :none
+(def Nudryorob-I (Tile. :exotic :p-59aa :t-59aa-e4d2 :none
                  "Barren Land with absolutely no sign of life.\nGround looks yellowish."
                  {:gold 3 :silver 2 :cu 3 :platinum 1 :cob 2} {:gold 2 :cu 3}))
 
-(def Nudryorob-II (Tile. :normal :p-59aa :t-59aa-ca57 :none
+(def Nudryorob-II (Tile. :exotic :p-59aa :t-59aa-ca57 :none
                   "Barren Land with absolutely no sign of life.\nGround looks silverish."
                   {:gold 2 :silver 4 :cu 1 :platinum 3 :cob 2} {:silver 2 :platinum 2}))
 
-(def Nudryorob-III (Tile. :normal :p-59aa :t-59aa-xadf :none
+(def Nudryorob-III (Tile. :exotic :p-59aa :t-59aa-xadf :none
                   "Barren Land with absoultely no sign of life.\nMost of the rocks have turned to dust."
                   {:ferrite-dust 5 :cu 2 :gold 1 :silver 1 :cob 1} {:platinum 2 :mag-ferrite 2}))
 
-(def Nudryorob-IV (Tile. :normal :p-59aa :t-59aa-xbdf :none
+(def Nudryorob-IV (Tile. :exotic :p-59aa :t-59aa-xbdf :none
                   "Barren Land with absoultely no sign of life.\nGround have traces of high temperature"
                   {:carbon 3 :cu 1 :gold 1 :silver 1} {:chro 2 :mag-ferrite 1 :io-cob 3}))
+
+(def Nudryorob-V (Tile. :exotic :p-59aa :t-59aa-x2bc :nudryorob-v
+                        "Barrend Land on a high mountain, with a great view of the stars."
+                        {:cu 2 :gold 3 :silver 3 :cob 2 :ferrite-dust 2} {:platinum 3 :io-cob 2}))
 
 (def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
 
@@ -216,11 +226,13 @@
   :t-59aa-ca57 Nudryorob-II
   :t-59aa-xadf Nudryorob-III
   :t-59aa-xbdf Nudryorob-IV
+  :t-59aa-x2bc Nudryorob-V
 })
 
 (def planet-map {
     :p-3dba [:t-3dba-xfce :t-3dba-xbea :t-3dba-xcaf :t-3dba-xdab :t-3dba-xaaa :t-3dba-xeff :t-3dba-xfda]
     :p-9a3e [:t-9a3e-xfe4 :t-9a3e-xc4d :t-9a3e-xbd2 :t-9a3e-x67e]
+    :p-59aa [:t-59aa-xadf :t-59aa-e4d2 :t-59aa-ca57 :t-59aa-x2bc :t-59aa-xbdf]
 })
 
 (def tiles-with-exclusive #{
