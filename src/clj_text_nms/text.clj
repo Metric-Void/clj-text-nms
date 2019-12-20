@@ -138,12 +138,12 @@
                     (recur
                         (rest planet-list)
                         (inc count)
-                        (format "\n%1s%2$2d: %3$s" msg count ((first planet-list) map/loc-map))
+                        (format "%1s\n%2$2d: %3$s" msg count ((first planet-list) map/loc-map))
                         )
                     )
                 )
         "t" (loop
-                [tile-list (keys (:map-locs player))
+                [tile-list (:map-locs player)
                 count      0
                 msg        (format "%s\nHere are the tiles you can teleport to" dividing-line)]
                 (if (empty? tile-list)
@@ -151,7 +151,7 @@
                     (recur
                         (rest tile-list)
                         (inc count)
-                        (format "\n%1s%2$2d: %3$s" msg count ((first tile-list) map/loc-map))
+                        (format "%1s\n%2$2d: %3$s" msg count ((first tile-list) map/loc-map))
                         )
                     )
                 )
@@ -161,7 +161,7 @@
 
 (def prompt-teleport "Do you want to teleport to a [p]lanet or a [t]ile?")
 
-(def msg-move "You can go
+(def msg-move "Try
     [N]orth
     [W]est
     [S]outh

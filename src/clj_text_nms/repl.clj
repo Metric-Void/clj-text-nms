@@ -16,7 +16,7 @@
             )
         )
     ([prompt]
-        (do (printf "%s>>" prompt)
+        (do (printf "%s >> " prompt)
             (flush)
             (read)
             )
@@ -115,34 +115,41 @@
     [player]
     (let [input   (read-with-inst text/prompt-teleport)
           initial (cljstr/lower-case (subs (name input) 0 1))]
-        (if (not (or (= initial "p") (= initial "t"))
-            (println "Invalid input."))
+        (if (not (or (= initial "p") (= initial "t")))
             (do
-                (println (text/msg-teleport-dest initial))
-                (let [input2  (read-with-inst "[C]ancel or teleport to ")]
+                (println "Invalid input.")
+                [player false]
+                )
+            (do
+                (println (text/msg-teleport-dest player initial))
+                (let [input2  (read-with-inst "[C]ancel or teleport to")]
                     (cond
                         (symbol? input2)
                             (do
-                                (if (= (cljstr/lower-case (subs (name input) 0 1)) "c")
+                                (if (= (cljstr/lower-case (subs (name input2) 0 1)) "c")
                                     (println "Teleport canceled.")
                                     (println "Invalid input.")
                                     )
-                                player
+                                [player false]
                                 )
                         (number? input2)
                             (if (or (< input2 0)
-                                    (> input2 (count (case initial
-                                                            "p" (count map/planet-map)
-                                                            "t" (count (:map-locs player)))
-                                                        ))
+                                    (> input2 (case initial
+                                                  "p" (count map/planet-map)
+                                                  "t" (count (:map-locs player))
+                                                  )
+                                       )
                                     )
                                 (do
                                     (println "Invalid input.")
-                                    player
+                                    [player false]
                                     )
-                                (case initial
-                                    "p" (player/tick-planet (player/teleport-planet player (nth map/planet-map     input2)))
-                                    "t" (player/tick-planet (player/teleport-tile   player (nth (:map-locs player) input2)))
+                                (do
+                                    (println "Teleport succeeded.")
+                                    (case initial
+                                        "p" [(player/tick-planet (player/teleport-planet player (nth (keys map/planet-map) input2))) true]
+                                        "t" [(player/tick-planet (player/teleport-tile   player (nth (:map-locs player)    input2))) true]
+                                        )
                                     )
                                 )
                         )
@@ -174,7 +181,7 @@
             [player       (player/new-player)
              newstate     true]
 
-            (let [on-ship-tile (= (:tile player) (:ship-tile player))]
+            (let [on-ship-tile (= (:tile player) (:tile (:ship player)))]
             
             (do (when newstate
                     (do

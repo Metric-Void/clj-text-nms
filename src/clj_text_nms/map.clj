@@ -84,7 +84,7 @@
   :t-5fec-xbee "Gorfis Tundra"
   :t-5fec-xdec "Nova Constantinople"
   :t-5fec-xdda "Tolkien Glacier"
-  :t-59aa "Nudryorob"
+  :p-59aa "Nudryorob"
   :t-59aa-e4d2 "Luknati Plain"
   :t-59aa-ca57 "Emkinses Plain"
   :t-59aa-xadf "Ackladesh Plain"
