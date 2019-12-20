@@ -175,8 +175,10 @@
 ; Scan the current tile and planet.
 ; Print some strings. Returns unmodified player state.
 (defn scan [player]
+    (println text/dividing-line)
     (println "Planet Scanning Result follows....")
     (map/desc-planet-by-id (:planet player))
+    (println text/dividing-line)
     (println "Region Scanning Result follows....")
     (map/describe-tile-id (:tile player))
 )

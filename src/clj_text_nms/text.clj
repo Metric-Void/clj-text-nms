@@ -3,19 +3,21 @@
     (:require [clj-text-nms.map :as map])
     (:require [clj-text-nms.logic :as logic]))
 
-(def op "Opening Messages.")
-
-(def options "You can
+(def options "    [S]can this territory
     [M]ine in this tile
-    [S]ee your inventory
+    [V]iew your inventory
     [C]raft new items
     [B]uild a base on this tile
     [Q]uit the game")
+
+(def teleport-option "    [T]eleport")
 
 (defn current-state
     [player]
     (format "Your HP: %2d%%     Life Supporting System: %2d%%" (:hp player) (:ls player))
     )
+
+(def dividing-line "-------------------------------------------------------------")
 
 ; (def current-state "Current State.")
 
@@ -121,7 +123,12 @@
         )
     )
 
-(def welcome-msg (str
+(defn msg-teleport-dest
+    [player]
+    nil
+    )
+
+(def op (str
     "Welcome to the text adventure game of No Man's Sky!"
     "In this game you will travel on and between planets, mine resources, craft items...."
     "And your final goal is to craft \"Heart of the Sun\". It require exclusive ingredients"

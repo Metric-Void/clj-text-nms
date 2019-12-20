@@ -109,31 +109,57 @@
         )
     )
 
+(defn teleport
+    [player]
+    [player false]
+    )
+
 (defn new-game
     []
     (do (println text/op)
         (loop
-            [player   (player/new-player)
-             newstate true]
+            [player       (player/new-player)
+             newstate     true]
+
+            (let [on-ship-tile (= (:tile player) (:ship-tile player))]
             
             (do (when newstate
                     (do
                         (println "=============================================================")
                         (println (text/current-state player))
+                        (when on-ship-tile
+                            (println "You are on the same tile with your spaceship.")
+                            )
                         )
+                    )
+                (println "You can")
+                (when on-ship-tile
+                    (println text/teleport-option)
                     )
                 (println text/options)
                 (let [input (read-with-inst)]
                     (if (symbol? input)
                         (case (cljstr/lower-case (subs (name input) 0 1))
-                            "m" (recur (player/tick-planet (player/mine player)) true)
                             "s" (do
+                                    (player/scan player)
+                                    (recur (player/tick-planet player) true)
+                                    )
+                            "m" (recur (player/tick-planet (player/mine player)) true)
+                            "v" (do
                                     (println (text/msg-inventory player))
                                     (recur player false)
                                     )
                             "c" (recur (player/tick-planet (craft player)) true)
                             "b" (recur (player/estab-base player) true)
                             "q" (println "See you again.")
+                            "t" (if (not on-ship-tile)
+                                    (do (println "Invalid input.")
+                                        (recur player false)
+                                        )
+                                    (let [result (teleport player)]
+                                        (recur (first result) (second result))
+                                        )
+                                    )
                             (do (println "Invalid input.")
                                 (recur player false)
                                 )
@@ -143,6 +169,7 @@
                             )
                         )
                     )
+                )
                 )
             )
         )
