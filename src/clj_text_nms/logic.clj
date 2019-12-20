@@ -25,7 +25,7 @@
      [{:noospheric-gel 1, :englobed-shade 1, :io-cob 50} {:noospheric-orb 1}]
      [{:emag-casing 1, :noospheric-orb 1, :mag-ferrite 5} {:dark-matter 1}]
      [{:part-collider 1, :dark-matter 1, :chro 25} {:dawns-end 1}]
-     [{:condens-photon 1, :dawns-end 1 :copper 100} {:photic-jade 1}]
+     [{:condens-photon 1, :dawns-end 1 :cu 100} {:photic-jade 1}]
      [{:async-obj 1, :photic-jade 1, :silver 50} {:state-phasure 1}]
      [{:stars-record 1, :gold 100, :state-phasure 1} {:novae-reclaiment 1}]
      [{:sim-record 1, :platinum 50, :novae-reclaiment 1} {:modified-quanta 1}]
@@ -97,7 +97,7 @@
 (defn all-crafts []
     "Print all items that can be crafted."
     (doseq [recipe craft-recipes]
-        (str-craft recipe)
+        (println (str-craft recipe))
     )
 )
 
