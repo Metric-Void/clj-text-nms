@@ -127,9 +127,39 @@
     )
 
 (defn msg-teleport-dest
-    [player]
-    nil
+    [player initial]
+    (case initial
+        "p" (loop
+                [planet-list (keys map/planet-map)
+                 count       0
+                 msg         (format "%s\nHere are the planets you can teleport to" dividing-line)]
+                (if (empty? planet-list)
+                    msg
+                    (recur
+                        (rest planet-list)
+                        (inc count)
+                        (format "\n%1s%2$2d: %3$s" msg count ((first planet-list) map/loc-map))
+                        )
+                    )
+                )
+        "t" (loop
+                [tile-list (keys (:map-locs player))
+                count      0
+                msg        (format "%s\nHere are the tiles you can teleport to" dividing-line)]
+                (if (empty? tile-list)
+                    msg
+                    (recur
+                        (rest tile-list)
+                        (inc count)
+                        (format "\n%1s%2$2d: %3$s" msg count ((first tile-list) map/loc-map))
+                        )
+                    )
+                )
+        "Wrong parameter"
+        )
     )
+
+(def prompt-teleport "Do you want to teleport to a [p]lanet or a [t]ile?")
 
 (def msg-move "You can go
     [N]orth

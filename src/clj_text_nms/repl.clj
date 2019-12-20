@@ -4,6 +4,7 @@
     (:require [clj-text-nms.player :as player])
     (:require [clj-text-nms.logic :as logic])
     (:require [clj-text-nms.text :as text])
+    (:require [clj-text-nms.map :as map])
     (:require [clojure.string :as cljstr])
     )
 
@@ -15,7 +16,7 @@
             )
         )
     ([prompt]
-        (do (printf "%s >>" prompt)
+        (do (printf "%s>>" prompt)
             (flush)
             (read)
             )
@@ -112,7 +113,43 @@
 
 (defn teleport
     [player]
-    [player false]
+    (let [input   (read-with-inst text/prompt-teleport)
+          initial (cljstr/lower-case (subs (name input) 0 1))]
+        (if (not (or (= initial "p") (= initial "t"))
+            (println "Invalid input."))
+            (do
+                (println (text/msg-teleport-dest initial))
+                (let [input2  (read-with-inst "[C]ancel or teleport to ")]
+                    (cond
+                        (symbol? input2)
+                            (do
+                                (if (= (cljstr/lower-case (subs (name input) 0 1)) "c")
+                                    (println "Teleport canceled.")
+                                    (println "Invalid input.")
+                                    )
+                                player
+                                )
+                        (number? input2)
+                            (if (or (< input2 0)
+                                    (> input2 (count (case initial
+                                                            "p" (count map/planet-map)
+                                                            "t" (count (:map-locs player)))
+                                                        ))
+                                    )
+                                (do
+                                    (println "Invalid input.")
+                                    player
+                                    )
+                                (case initial
+                                    "p" (player/tick-planet (player/teleport-planet player (nth map/planet-map     input2)))
+                                    "t" (player/tick-planet (player/teleport-tile   player (nth (:map-locs player) input2)))
+                                    )
+                                )
+                        )
+                    )
+                )
+            )
+        )
     )
 
 (defn move
