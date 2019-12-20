@@ -80,11 +80,11 @@
   :t-9a3e-xbd2 "Ebatus Pit"
   :t-9a3e-x67e "Rhyfordias Terminus"
   :p-5fec "Talandra"
-  :p-5fec-xaac "Shariat Cliff"
-  :p-5fec-xbee "Gorfis Tundra"
-  :p-5fec-xdec "Nova Constantinople"
-  :p-5fec-xdda "Tolkien Glacier"
-  :p-59aa "Nudryorob"
+  :t-5fec-xaac "Shariat Cliff"
+  :t-5fec-xbee "Gorfis Tundra"
+  :t-5fec-xdec "Nova Constantinople"
+  :t-5fec-xdda "Tolkien Glacier"
+  :t-59aa "Nudryorob"
   :t-59aa-e4d2 "Luknati Plain"
   :t-59aa-ca57 "Emkinses Plain"
   :t-59aa-xadf "Ackladesh Plain"
@@ -101,21 +101,21 @@
 ;;
 
 (def loc-dir-map {
-  :t-3dba-xfce {:east :t-3dba-xbea, :south nil, :west nil, :north :t-3dba-xdab},
-  :t-3dba-xbea {:east nil, :south nil, :west :t-3dba-xfce, :north :t-3dba-xcaf},
-  :t-3dba-xcaf {:east nil, :south :t-3dba-xbea, :west :t-3dba-xdab, :north :t-3dba-xeff},
-  :t-3dba-xdab {:east :t-3dba-xcaf, :south :t-3dba-xfce, :west nil, :north :t-3dba-xaaa},
-  :t-3dba-xaaa {:east :t-3dba-xeff, :south :t-3dba-xdab, :west nil, :north nil},
-  :t-3dba-xeff {:east :t-3dba-xfda, :south :t-3dba-xcaf, :west :t-3dba-xaaa, :north nil},
-  :t-3dba-xfda {:east nil, :south nil, :west :t-3dba-xeff, :north nil},
-  :t-9a3e-xc4d {:east :t-9a3e-x67e :north :t-9a3e-xfe4},
-  :t-9a3e-x67e {:west :t-9a3e-xc4d :north :t-9a3e-xbd2},
-  :t-9a3e-xfe4 {:south :t-9a3e-xc4d :east :t-9a3e-xbd2},
-  :t-9a3e-xbd2 {:south :t-9a3e-x67e :west :t-9a3e-xfe4},
-  :p-5fec-xaac {:east nil, :south :p-5fec-xdec, :west nil, :north nil},
-  :p-5fec-xbee {:east nil, :south nil, :west :p-5fec-xdec, :north nil},
-  :p-5fec-xdec {:east :p-5fec-xbee, :south :p-5fec-xdda, :west nil, :north :p-5fec-xaac},
-  :p-5fec-xdda {:east nil, :south nil, :west nil, :north :p-5fec-xdec}
+  :t-3dba-xfce {:east :t-3dba-xbea, :south nil, :west nil, :north :t-3dba-xdab}
+  :t-3dba-xbea {:east nil, :south nil, :west :t-3dba-xfce, :north :t-3dba-xcaf}
+  :t-3dba-xcaf {:east nil, :south :t-3dba-xbea, :west :t-3dba-xdab, :north :t-3dba-xeff}
+  :t-3dba-xdab {:east :t-3dba-xcaf, :south :t-3dba-xfce, :west nil, :north :t-3dba-xaaa}
+  :t-3dba-xaaa {:east :t-3dba-xeff, :south :t-3dba-xdab, :west nil, :north nil}
+  :t-3dba-xeff {:east :t-3dba-xfda, :south :t-3dba-xcaf, :west :t-3dba-xaaa, :north nil}
+  :t-3dba-xfda {:east nil, :south nil, :west :t-3dba-xeff, :north nil}
+  :t-9a3e-xc4d {:east :t-9a3e-x67e :north :t-9a3e-xfe4}
+  :t-9a3e-x67e {:west :t-9a3e-xc4d :north :t-9a3e-xbd2}
+  :t-9a3e-xfe4 {:south :t-9a3e-xc4d :east :t-9a3e-xbd2}
+  :t-9a3e-xbd2 {:south :t-9a3e-x67e :west :t-9a3e-xfe4}
+  :t-5fec-xaac {:east nil, :south :t-5fec-xdec, :west nil, :north nil}
+  :t-5fec-xbee {:east nil, :south nil, :west :t-5fec-xdec, :north nil}
+  :t-5fec-xdec {:east :t-5fec-xbee, :south :t-5fec-xdda, :west nil, :north :t-5fec-xaac}
+  :t-5fec-xdda {:east nil, :south nil, :west nil, :north :t-5fec-xdec}
 })
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
@@ -123,6 +123,8 @@
 (def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet" 65.6 0.1 0.1 8))
 
 (def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere" 32.0 0.1 0.1 10))
+
+(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
 
 (def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory-one
                            "An open ground with a Gek Observatory in the center.\nYou can see lots of plants around, but no animals.\nRocks on the ground seems to be rich of ferrite."
@@ -189,21 +191,19 @@
                         "Barrend Land on a high mountain, with a great view of the stars."
                         {:cu 2 :gold 3 :silver 3 :cob 2 :ferrite-dust 2} {:platinum 3 :io-cob 2}))
 
-(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
-
-(def Talandra-V-I (Tile. :normal :p-5fec :p-5fec-xaac :none
+(def Talandra-V-I (Tile. :normal :p-5fec :t-5fec-xaac :none
                             "A rock cliff covered by ice."
                             {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow 1}))
 
-(def Talandra-V-II (Tile. :normal :p-5fec :p-5fec-xbee :none
+(def Talandra-V-II (Tile. :normal :p-5fec :t-5fec-xbee :none
                             "A tundra landscape. Only moss and lichen grows here"
                             {:carbon 1 :co2 2 :ferrite-dust 1} {:sic-pow 1}))
 
-(def Talandra-V-III (Tile. :normal :p-5fec :p-5fec-xdec :fortress
+(def Talandra-V-III (Tile. :normal :p-5fec :t-5fec-xdec :fortress
                             "An open ground with a huge man-made structure in the center.\nIt seems to be a shelter, but was deserted a long time ago.\nYou don't know who built it or what it was for."
                             {:co2 1 :ferrite-dust 3} {}))
 
-(def Talandra-V-IV (Tile. :normal :p-5fec :p-5fec-xdda :none
+(def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :none
                             "A glacier made of pure ice."
                             {:co2 5} {:sic-pow 2}))
 
@@ -227,12 +227,18 @@
   :t-59aa-xadf Nudryorob-III
   :t-59aa-xbdf Nudryorob-IV
   :t-59aa-x2bc Nudryorob-V
+  :p-5fec Talandra-V
+  :t-5fec-xaac Talandra-V-I
+  :t-5fec-xbee Talandra-V-II
+  :t-5fec-xdec Talandra-V-III
+  :t-5fec-xdda Talandra-V-IV
 })
 
 (def planet-map {
     :p-3dba [:t-3dba-xfce :t-3dba-xbea :t-3dba-xcaf :t-3dba-xdab :t-3dba-xaaa :t-3dba-xeff :t-3dba-xfda]
     :p-9a3e [:t-9a3e-xfe4 :t-9a3e-xc4d :t-9a3e-xbd2 :t-9a3e-x67e]
     :p-59aa [:t-59aa-xadf :t-59aa-e4d2 :t-59aa-ca57 :t-59aa-x2bc :t-59aa-xbdf]
+    :p-5fec [:t-5fec-xaac :t-5fec-xbee :t-5fec-xdec :t-5fec-xdda]
 })
 
 (def tiles-with-exclusive #{

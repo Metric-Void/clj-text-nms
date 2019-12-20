@@ -97,6 +97,28 @@
    ]
   )
 
+(def fortress
+  [(fn [player]
+    (println "The place turns out to be the last fortress of an alien civilization.")
+    (println "Here the survivals of this species spent their final days.")
+    (println "You do not know exactly what difficulties they encountered.")
+    (println "There are some remaining supplies. The food is still edible!")
+    (println "It tastes like dirt, but restored some HP.")
+    (-> player
+      (add-item {:silver 36, :gold 23, :platinum 17, :io-cob 32, :met-plate 8, :dih-gel 5, :c-tube 3, :h-seal 2})
+      (player/update-hp #(+ % 10))
+      ;;todo set flag
+    ))
+   (fn [player]
+    (println "You find a way into the deepest part of the fortress and see a laboratory.")
+    (println "There is a dark dodecahedron box on the table. It seems unbreakable.")
+    (println "Luckily, it is open. You look inside and find an intricate circuit.")
+    (println "It seems to be able to generate a force field around the box.")
+    (add-item player {:emag-casing 1}))
+   ]
+  )
+
+
 (def korvax-at-mii-vi [
   (fn [player]
     (println "The research center is holding lots of blueprints.")
@@ -189,7 +211,7 @@
     (println "As you dug down, you saw a telescope and a dome.")
     (println "This place used to be an observatory. They carry a record of all stellar objects.")
     (println "You retrieved an exclusive item, Record of the stars.")
-    {add-item player {:stars-record 1}}
+    (add-item player {:stars-record 1})
   )
 ])
 
