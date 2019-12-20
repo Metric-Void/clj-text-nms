@@ -122,15 +122,14 @@
 ; Both tile and planet will be changed.
 ; Starship follows the player
 ; newtile destination specified by player
-; returns player success 
+; returns player
 (defn teleport [player newtile]
-    (cond (nil? ((:map-locs player) newtile)) [player false]
-        (not (= (:tile player) (:tile (:ship player)))) [player false]
-        (< (:fuel (:ship player)) 25) [player false]
-        :else [(-> player (assoc :tile newtile :planet (:planet (newtile map/loc-obj-map)))
+    (cond (nil? ((:map-locs player) newtile)) player
+        (not (= (:tile player) (:tile (:ship player)))) player
+        (< (:fuel (:ship player)) 25) player
+        :else (-> player (assoc :tile newtile :planet (:planet (newtile map/loc-obj-map)))
                     (assoc-in [:ship :tile] newtile)
-                    (update-ship-fuel #(- % 25)))
-                true]))
+                    (update-ship-fuel #(- % 25)))))
 
 ; Interactive command, recharge Life Support.
 ; Returns new player status.
