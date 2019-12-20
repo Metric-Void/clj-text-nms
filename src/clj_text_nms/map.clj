@@ -274,7 +274,7 @@
 (def Pathavon-IV (Tile. :normal :p-67ec :t-67ec-xe7f :none
                    "A high mountain with its peaks covered in snow."
                    {:ammo 2 :di-hydro 2} {:sic-pow 2}))
-                   
+
 (def Pathavon-V (Tile. :normal :p-67ec :t-67ec-x7f7 :none
                    "A plateau with heavy seasonal rainfall."
                    {:carbon 1 :ammo 4 :di-hydro 2} {:sic-pow 3 :cond-carbon 3}))
