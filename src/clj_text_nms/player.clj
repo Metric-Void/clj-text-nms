@@ -93,7 +93,7 @@
                 )
                 (do
                     (println "Success // You've established a base on this tile.")
-                    (tick-planet (update new-player :base-tiles #(conj % (:tile player))))
+                    (tick-planet (update new-player :base-tiles #(conj % (:tile player)) :map-locs #(conj % (:tile player))))
                 )
             )
         )

@@ -107,6 +107,13 @@
                    (println "You've got advanced mining laser!")
                    (assoc player :adv-laser true)
                )
+     :heart-of-the-sun (fn [player]
+                        (println "You've got Heart Of The Sun!")
+                        (println "This item can ignite a sun and create a new galaxy.")
+                        (println "And welcome to the end of this journey.")
+                        (println "You won this game, but you can choose to continue playing.")
+                        (println "Wish you a nice journey among the stars.")
+                       )
 })
 
 ; Check if the products of the recipe is special.
@@ -114,12 +121,12 @@
 ; Return new player status.
 (defn check-special-craft [player recipe]
     "Check special crafts."
-    (let [prods (keys (last recipe))]
+    (let [prods (vec (keys (last recipe)))]
         (loop [remkeys prods p player]
             (if (empty? remkeys)
                 p
-                (if (contains? remkeys (first prods))
-                    (recur (rest remkeys) (((first prods) special-crafts) p))
+                (if (contains? special-crafts (first remkeys))
+                    (recur (rest remkeys) (((first remkeys) special-crafts) p))
                     (recur (rest remkeys) p)
                 )
             )

@@ -200,6 +200,27 @@
   )
 ])
 
+(def talandra-v-iv [
+  (fn [player]
+    (println "This iceburg have something glowing inside.")
+    (println "A friendly animal passing by brought you life support")
+    (println "She looks like a deer, but with much thicker fur.")
+    (player/update-ls player #(+ % 50))
+  )
+  (fn [player]
+    (println "You tried to dig to the center of the iceburg.")
+    (println "The light became brighter and brigher. You can't see what's inside")
+    (println "The temperature is also getting unbelievably cold. Your exosuit is struggling.")
+    (println "When you reached the center, you've drained almost all your life support.")
+    (println "The light seems to come from a curiousity: Condensed Photon.")
+    (println "Nobody knows why photon can be condensed, but here it is in an iceburg.")
+    (println "You picked it up very carefully.")
+    (as-> player p
+      (player/update-ls p #(- % 50))
+      (add-item p {:condens-photon 1})
+    )
+  )
+])
 (def nudryorob-v [
   (fn [player]
     (println "You found a metal plating penetrating out of the ground.")
@@ -212,6 +233,28 @@
     (println "This place used to be an observatory. They carry a record of all stellar objects.")
     (println "You retrieved an exclusive item, Record of the stars.")
     (add-item player {:stars-record 1})
+  )
+])
+
+(def umis-iii [
+  (fn [player]
+    (println "You chatted with the Gek owner of the trading outpost.")
+    (println "This outpost had a long history, and it has been passed by several generations.")
+    (println "They're maintaining some historical, important trade routes.")
+    (println "He gave you a curiosity, a time capsule as a present.")
+    (add-item player {:time-capsule 1})
+  )
+])
+
+(def umis-iv [
+  (fn [player]
+    (println "This is a Vy-Keen production facility, a weird sight")
+    (println "since most creatures think they only know about wars.")
+    (println "This facility is making antimatter for starship hyperdrives")
+    (println "But they just found a better method than colliding particles")
+    (println "So they're getting rid of old particle colliders.")
+    (println "You got the curiosity: Particle Collider!")
+    (add-item player {:part-collider 1})
   )
 ])
 
@@ -229,7 +272,9 @@
     :luvocious-i-ii luvocious-i-ii
     :luvocious-i-iv luvocious-i-iv
     :nudryorob-v nudryorob-v
-    ; TODO
+    :talandra-v-iv talandra-v-iv
+    :umis-iii umis-iii
+    :umis-iv umis-iv
 })
 
 ; Let the player explore the current tile.
