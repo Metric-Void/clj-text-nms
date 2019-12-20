@@ -152,6 +152,24 @@
                            "A Korvax Transmission Tower stands at the center of a midland."
                            {:sulfur 3 :carbon 2 :oxygen 2 :sic-pow 1} {:cob 2 :mag-ferrite 2}))
 
+(def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere" 32.0 0.1 0.1 10))
+
+(def Nudryorob-I (Tile. :normal :p-59aa :t-59aa-e4d2 :none
+                 "Barren Land with absolutely no sign of life.\nGround looks yellowish."
+                 {:gold 3 :silver 2 :cu 3 :platinum 1 :cob 2} {:gold 2 :cu 3}))
+
+(def Nudryorob-II (Tile. :normal :p-59aa :t-59aa-ca57 :none
+                  "Barren Land with absolutely no sign of life.\nGround looks silverish."
+                  {:gold 2 :silver 4 :cu 1 :platinum 3 :cob 2} {:silver 2 :platinum 2}))
+
+(def Nudryorob-III (Tile. :normal :p-59aa :t-59aa-xadf :none
+                  "Barren Land with absoultely no sign of life.\nMost of the rocks have turned to dust."
+                  {:ferrite-dust 5 :cu 2 :gold 1 :silver 1 :cob 1} {:platinum 2 :mag-ferrite 2}))
+
+(def Nudryorob-IV (Tile. :normal :p-59aa :t-59aa-xbdf :none
+                  "Barren Land with absoultely no sign of life.\nGround have traces of high temperature"
+                  {:carbon 3 :cu 1 :gold 1 :silver 1} {:chro 2 :mag-ferrite 1 :io-cob 3}))
+
 (def loc-obj-map {
   :p-3dba Mabiangra-II
   :t-3dba-xfce Mabiangra-II-I
@@ -166,6 +184,11 @@
   :t-9a3e-xc4d Luvocious-I-II
   :t-9a3e-xbd2 Luvocious-I-III
   :t-9a3e-x67e Luvocious-I-IV
+  :p-59aa Nudryorob
+  :t-59aa-e4d2 Nudryorob-I
+  :t-59aa-ca57 Nudryorob-II
+  :t-59aa-xadf Nudryorob-III
+  :t-59aa-xbdf Nudryorob-IV
 })
 
 (def planet-map {

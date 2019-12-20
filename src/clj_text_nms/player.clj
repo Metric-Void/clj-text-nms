@@ -191,7 +191,7 @@
 ; Direction - One of :north, :south, :west, :east
 ; Returns new player state.
 (defn move [player direction]
-    (let [adj-locs (direction map/loc-dir-map)
+    (let [adj-locs ((:tile player) map/loc-dir-map)
           next-tile (direction adj-locs)]
         (if (nil? next-tile)
             (do (println "You can't go that way.") player)

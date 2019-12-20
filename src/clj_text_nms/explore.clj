@@ -69,6 +69,18 @@
    ]
   )
 
+(def exotic-fns [
+  (fn [player]
+    (println "It's just rocks and dusts. There's nothing to see here")
+    player
+  )
+  (fn [player]
+    (println "You found some eggs on the ground. Is it the only life on here?")
+    (println "As you tried to examine it, Creatures appeared under the eggs.")
+    (println "They're the biological horrors. ")
+    player
+  )
+])
 (def observatory-one
   [(fn [player]
       (println "The terminal in the observatory was not logged out by the last user.")
