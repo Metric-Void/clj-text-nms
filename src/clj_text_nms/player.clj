@@ -97,7 +97,10 @@
             (println "You do not have enough items!")
             (do
                 (println "Crafting success!")
-                (assoc player :inventory new-inv)
+                (as-> player p
+                      (assoc p :inventory new-inv)
+                      (logic/check-special-craft p recipe)
+                )
             )
         )
     )
@@ -149,6 +152,33 @@
         )
         (do (println "Recharging life support requires Oxygen, which you don't have any.") player)
     )
+)
+
+; Move to another tile
+; Player - player state.
+; Direction - One of :north, :south, :west, :east
+; Returns new player state.
+(defn move [player direction]
+    (let [adj-locs (direction map/loc-dir-map)
+          next-tile (direction adj-locs)]
+        (if (nil? next-tile)
+            (do (println "You can't go that way.") player)
+            (let [next-tile-obj (next-tile map/loc-obj-map)]
+                (println "You've reached a new region.")
+                (map/describe-tile next-tile-obj)
+                (assoc player :tile next-tile :planet (:planet next-tile-obj))
+            )
+        )
+    )
+)
+
+; Scan the current tile and planet.
+; Print some strings. Returns unmodified player state.
+(defn scan [player]
+    (println "Planet Scanning Result follows....")
+    (map/desc-planet-by-id (:planet player))
+    (println "Region Scanning Result follows....")
+    (map/describe-tile-id (:tile player))
 )
 
 ; Set new HP. Ensure HP is between 0 and 100.

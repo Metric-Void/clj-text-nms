@@ -120,3 +120,11 @@
             )
         )
     )
+
+(def welcome-msg (str
+    "Welcome to the text adventure game of No Man's Sky!"
+    "In this game you will travel on and between planets, mine resources, craft items...."
+    "And your final goal is to craft \"Heart of the Sun\". It require exclusive ingredients"
+    "that could only be found by exploring regions. Your scanner will tell you if a region"
+    "contains exclusive items."
+))

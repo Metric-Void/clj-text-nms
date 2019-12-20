@@ -3,6 +3,8 @@
     (:require [clj-text-nms.map :as map]
               [clojure.string :as cljstr]))
 
+(declare str-craft)
+
 (def craft-recipes
     [[{:cu 2} {:chro 1}]
      [{:chro 1} {:cu 2}]
@@ -11,6 +13,20 @@
      [{:carbon 1, :oxygen 2} {:co2 1}]
      [{:ferrite-dust 2} {:mag-ferrite 1}]
      [{:mag-ferrite 1} {:ferrite-dust 2}]
+     [{:carbon 50} {:c-tube 1}]
+     [{:ferrite-dust 30} {:met-plat 1}]
+     [{:di-hydro 40} {:dih-gel 1}]
+     [{:met-plat 5, :c-tube 2, :dih-gel 1} {:adv-laser 1}]
+     [{:nanode-shell 1, :chro 100} {:captured-nanode 1}]
+     [{:light-of-night 1, :captured-nanode 1, :ferrite-dust 100} {:englobed-shade 1}]
+     [{:noospheric-gel 1, :englobed-shade 1, :io-cob 50} {:noospheric-orb 1}]
+     [{:emag-casing 1, :noospheric-orb 1, :mag-ferrite 5} {:dark-matter 1}]
+     [{:part-collider 1, :dark-matter 1, :chro 25} {:dawns-end 1}]
+     [{:condens-photon 1, :dawns-end 1 :copper 100} {:photic-jade 1}]
+     [{:async-obj 1, :photic-jade 1, :silver 50} {:state-phasure 1}]
+     [{:stars-record 1, :gold 100, :state-phasure 1} {:novae-reclaiment 1}]
+     [{:sim-record 1, :platinum 50, :novae-reclaiment 1} {:modified-quanta 1}]
+     [{:time-capsule 1, :uranium 100, :modified-quanta 1} {:heart-of-the-sun 1}]
     ])
 
 ; Add two hashmaps.
@@ -73,6 +89,39 @@
     "Returns a 2-d vector of craftable items."
     (filter #(some? (subtract-hashmap (:inventory player) (first %))) craft-recipes)
 )
+
+; Print all recipes.
+(defn all-crafts []
+    "Print all items that can be crafted."
+    (doseq [recipe craft-recipes]
+        (str-craft recipe)
+    )
+)
+
+; Sprcial crafting recipes that trigger a function.
+(def special-crafts {
+    :adv-laser (fn [player]
+                   (println "You've got advanced mining laser!")
+                   (assoc player :adv-laser true)
+               )
+})
+
+; Check if the products of the recipe is special.
+; Execute corresponding functions for special crafts.
+; Return new player status.
+(defn check-special-craft [player recipe]
+    "Check special crafts."
+    (let [prods (keys (last recipe))]
+        (loop [remkeys prods p player]
+            (if (empty? remkeys)
+                p
+                (if (contains? remkeys (first prods))
+                    (recur (rest remkeys) (((first prods) special-crafts) p))
+                    (recur (rest remkeys) p)
+                )
+            )
+        )
+))
 
 ; Craft the given recipe many times.
 ; Return new inventory. nil if item not enough.

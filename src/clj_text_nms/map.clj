@@ -15,14 +15,43 @@
   :paraff "Paraffinium",
   :cond-carbon "Condensed Carbon",
   :mag-ferrite "Magnetized Ferrite",
+  :cob "Cobalt",
+  :io-cob "Ionized Cobalt",
   :ura "Uranium",
   :ammo "Ammonium",
   :sulf "Sulfur",
   :co2 "CO2",
   :cu "Copper",
+  :silver "Silver",
+  :gold "Gold",
+  :platinum "Platinum"
   :chro "Chromatic Metal",
   :cl "Chloride",
-  :adv-laser "Advanced mining laser."
+  :adv-laser "Advanced mining laser.",
+  :met-plate "Metal Plating",
+  :dih-gel "Di-Hydrogen Gel",
+  :c-tube "Carbon Nanotube",
+  :h-seal "Hermetic Seal",
+  :nanode-shell "Nanode Enclosure",                         ;Curiousity 1
+  :captured-nanode "Captured Nanode",
+  :light-of-night "Light of Night",                         ;Curiousity 2
+  :englobed-shade "Englobed Shade",
+  :noospheric-gel "Noospheric Gel",                         ;Curiousity 3
+  :noospheric-orb "Noospheric Orb",
+  :emag-casing "Dark Matter Casing",                        ;Curiousity 4
+  :dark-matter "Dark Matter",
+  :part-collider "Particle Collider",                       ;Curiousity 5
+  :dawns-end "Dawn's end",
+  :condens-photon "Condensed Photon",                       ;Curiousity 6
+  :photic-jade "Photic Jade"
+  :async-obj  "Asynchronous Exciter"                        ;Curiousity 7
+  :state-phasure "State Phasure"
+  :stars-record "Record of the stars"                       ;Curiousity 8
+  :novae-reclaiment "Novae Reclaiment"
+  :sim-record "Simulation Record"                           ;Curiousity 9
+  :modified-quanta "Modified Quanta"
+  :time-capsule "Time Capsule"                              ;Curiousity 10
+  :heart-of-the-sun "Heart of the Sun"                      ;Final goal
 })
 
 (def planet-envs {
@@ -71,28 +100,28 @@
                            {:carbon 5 :di-hydro 3 :oxygen 3 :ferrite-dust 5 :paraff 2}
                            {:cond-carbon 2 :mag-ferrite 3 :sic-pow 3}))
 
-(def Mabiangra-II-II (Tile. :normal :p-3dba :t-3dba-xbea nil
+(def Mabiangra-II-II (Tile. :normal :p-3dba :t-3dba-xbea :none
                             "This place seems to be full of flowers.\nFlowers on the ground are rich in oxygen."
                             {:carbon 3 :oxygen 4} {:mag-ferrite 3}))
 
-(def Mabiangra-II-III (Tile. :monster :p-3dba :t-3dba-xcaf nil
+(def Mabiangra-II-III (Tile. :monster :p-3dba :p-3dba-xcaf :none
                             "This is a dense forest.\nTrees grow so closely together that it is gloomy even at noon.\nThe fog that covers the depth of the forest forest makes it look creepier."
                             {:carbon 5 :oxygen 3 :paraff 2}
                             {:cond-carbon 5}))
 
-(def Mabiangra-II-IV (Tile. :normal :p-3dba :t-3dba-xdab nil
-                            "An open grassland.\nPlants contain carbon and oxygen."
+(def Mabiangra-II-IV (Tile. :normal :p-3dba :t-3dba-xdab :none
+                            "An open grassland, with no trees or buildings in sight.\nPlants contain carbon and oxygen."
                             {:carbon 2 :di-hydro 1 :oxygen 2 :ferrite-dust 3} {:sic-pow 2}))
 
-(def Mabiangra-II-V (Tile. :normal :p-3dba :t-3dba-xaaa nil
-                            "A beautiful hilly landscape."
-                            {:di-hydro 3 :ferrite-dust 4 :paraff 3} {:mag-ferrite 3}))
+(def Mabiangra-II-V (Tile. :normal :p-3dba :t-3dba-xaaa :none
+                            "A beautiful hilly landscape. Small traces of shiny stuff can be seen on the mountains."
+                            {:di-hydro 3 :ferrite-dust 4 :paraff 3 :cu 1} {:mag-ferrite 3}))
 
-(def Mabiangra-II-VI (Tile. :normal :p-3dba :t-3dba-xeff nil
-                            "A small valley."
+(def Mabiangra-II-VI (Tile. :normal :p-3dba :t-3dba-xeff :korvax-at-mii-vi
+                            "A small valley with a Korvax research center close to waters.\nA huge device sits at the middle of the building."
                             {:carbon 1 :oxygen 3 :ferrite-dust 2} {:mag-ferrite 1 :sic-pow 1}))
 
-(def Mabiangra-II-VII (Tile. :normal :p-3dba :t-3dba-xfda nil
+(def Mabiangra-II-VII (Tile. :normal :p-3dba :t-3dba-xfda :none
                             "A steep rock cliff.\nYou can see nothing here but stones."
                             {:ferrite-dust 2} {:mag-ferrite 3 :sic-pow 3}))
 
@@ -107,6 +136,10 @@
   :t-3dba-xfda Mabiangra-II-VII
 })
 
+(def tiles-with-exclusive #{
+  :t-3dba-xfce :t-3dba-xeff
+})
+
 (defn describe-planet [planet]
   (println (format "Planet: %s\nEnvironment: %s\nDescription: %s\nTemperature(avg.): %fC\nRadioactivity: %f rad.\nToxicity: %f tox."
   ((:id planet) loc-map) ((:type planet) planet-envs) (:desc planet) (:temp planet) (:rad planet) (:tox planet))
@@ -117,7 +150,8 @@
 )
 
 (defn describe-tile [tile]
-  (println (format "Name: %s\nOn Planet: %s\nDescription:%s\n" ((:id tile) loc-map) ((:planet tile) loc-map) (:desc tile)))
+  (println (format "Name: %s\nOn Planet: %s\nDescription:%s\nHave Curiousity:%s"
+                   ((:id tile) loc-map) ((:planet tile) loc-map) (:desc tile) (contains? tiles-with-exclusive (:id tile))))
 )
 
 (defn describe-tile-id [tile-id]

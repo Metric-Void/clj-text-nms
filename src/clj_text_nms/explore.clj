@@ -67,8 +67,38 @@
       (println "The terminal in the observatory was not logged out by the last user.")
       (println "You retrieved a location data from it.")
       ; TODO - Add a tile.
-    )]
+      player
+    )
+   (fn [player]
+     (println "You found a curiousity in the observatory!")
+     (println "It's a spherical nanode enclusure. It looks red and translucent.")
+     (println "The special material on its surface does not conduct heat.")
+     (add-item player {:nanode-shell 1})
+     )
+   ]
   )
+
+(def korvax-at-mii-vi [
+  (fn [player]
+    (println "The research center is holding lots of blueprints.")
+    (println "It seems that they have some extra material for disposal.")
+    (println "But you may need them. It's some Ammonia.")
+    (add-item player {:ammo 10})
+  )
+  (fn [player]
+    (println "Your wandering around the facility has clearly made some sentinels unhappy.")
+    (println "They tried to shoot you, buy you swiftly evaded.")
+    player
+  )
+  (fn [player]
+    (println "Your wandering around the facility has clearly made some sentinels unhappy.")
+    (println "You got several shots before you evade, but you collected some ferrite dust from their ammo.")
+    (as-> player p
+      (player/update-hp p #(- % (+ (rand-int 5) 5)))
+      (add-item p {:ferrite-dust 20})
+    )
+  )
+])
 
 (def env-vec-map {
   :normal normal-fns
@@ -77,7 +107,9 @@
 
 (def explore-functions {
     :observatory-one [observatory-one]
-                        ; TODO
+    :none []
+    :korvax-at-mii-vi [korvax-at-mii-vi]
+    ; TODO
 })
 
 ; Let the player explore the current tile.
