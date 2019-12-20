@@ -96,6 +96,12 @@
   :t-2ea1-x67f "Ilnyoti Plain"
   :t-2ea1-x3db "Podimi Valley"
   :t-2ea1-xbc2 "Srbija Mounts"
+  :p-67ec "Pathavon"
+  :t-67ec-xae5 "Daranma Valley"
+  :t-67ec-xd34 "Lake Song"
+  :t-67ec-x3a6 "Menkar Hills"
+  :t-67ec-xe7f "Mount Qabji"
+  :t-67ec-x7f7 "Naya-Sohra Plateau"
 })
 
 ;;
@@ -132,6 +138,11 @@
   :t-2ea1-x67f {:north :t-2ea1-x4a3 :south :t-2ea1-xbc2}
   :t-2ea1-x3db {:west :t-2ea1-xbc2}
   :t-2ea1-xbc2 {:north :t-2ea1-x67f :east :t-2ea1-x3db}
+  :t-67ec-xae5 {:east :t-67ec-x7f7 :south nil :west :t-67ec-x3a6 :north :t-67ec-xd34}
+  :t-67ec-xd34 {:east nil :south :t-67ec-xae5 :west nil :north nil}
+  :t-67ec-x3a6 {:east :t-67ec-xae5 :south nil :west nil :north nil}
+  :t-67ec-xe7f {:east nil :south nil :west nil :north :t-67ec-x7f7}
+  :t-67ec-x7f7 {:east nil :south :t-67ec-xe7f :west :t-67ec-xae5 :north nil}
 })
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet. Rich in Magnetized Ferrite and Paraffinum" 30.9 0.1 0.1 2))
@@ -140,11 +151,11 @@
 
 (def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere. Rich in all kins of metal." 32.0 0.1 0.1 5))
 
-(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet. Rich in Dioxide and ferrite" -40.0 0.1 0.1 4))
+(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet. Rich in Carbon Dioxide and ferrite" -40.0 0.1 0.1 4))
 
 (def Umis (Planet. :rad :g-lkx :p-2ea1 "A radioactive planet. Rich in Uranium" 20.0 6.3 0.3 4))
 
-; (def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
+(def Pathavon (Planet. :tox :g-lkx :p-67ec "A toxic and mountainous planet. Rich in ammonia." 19.0 0.1 7.5 4))
 
 (def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory-one
                            "An open ground with a Gek Observatory in the center.\nYou can see lots of plants around, but no animals.\nRocks on the ground seems to be rich of ferrite."
@@ -248,6 +259,26 @@
                    {:ferrite-dust 5 :ura 5 :carbon 2 :sic-pow 5 :di-hydro 2}
                    {:silver 2 :gold 2 :mag-ferrite 2}))
 
+(def Pathavon-I (Tile. :normal :p-67ec :t-67ec-xae5 :none
+                   "A valley surrounded by mountains. A river flows through it."
+                   {:carbon 1 :ammo 3 :di-hydro 2} {:sic-pow 2}))
+
+(def Pathavon-II (Tile. :normal :p-67ec :t-67ec-xd34 :none
+                   "A huge lake covered in mist."
+                   {:carbon 1 :ammo 5 :di-hydro 3} {:sic-pow 1 :cond-carbon 3}))
+
+(def Pathavon-III (Tile. :normal :p-67ec :t-67ec-x3a6 :none
+                   "A hilly landscape."
+                   {:carbon 3 :ammo 2 :di-hydro 1} {:sic-pow 2 :cond-carbon 1}))
+
+(def Pathavon-IV (Tile. :normal :p-67ec :t-67ec-xe7f :none
+                   "A high mountain with its peaks covered in snow."
+                   {:ammo 2 :di-hydro 2} {:sic-pow 2}))
+                   
+(def Pathavon-V (Tile. :normal :p-67ec :t-67ec-x7f7 :none
+                   "A plateau with heavy seasonal rainfall."
+                   {:carbon 1 :ammo 4 :di-hydro 2} {:sic-pow 3 :cond-carbon 3}))
+
 (def loc-obj-map {
   :p-3dba Mabiangra-II
   :t-3dba-xfce Mabiangra-II-I
@@ -279,6 +310,12 @@
   :t-2ea1-x67f Umis-III
   :t-2ea1-x3db Umis-IV
   :t-2ea1-xbc2 Umis-V
+  :p-67ec Pathavon
+  :t-67ec-xae5 Pathavon-I
+  :t-67ec-xd34 Pathavon-II
+  :t-67ec-x3a6 Pathavon-III
+  :t-67ec-xe7f Pathavon-IV
+  :t-67ec-x7f7 Pathavon-V
 })
 
 (def planet-map {
@@ -287,6 +324,7 @@
     :p-59aa [:t-59aa-xadf :t-59aa-e4d2 :t-59aa-ca57 :t-59aa-x2bc :t-59aa-xbdf]
     :p-5fec [:t-5fec-xaac :t-5fec-xbee :t-5fec-xdec :t-5fec-xdda]
     :p-2ea1 [:t-2ea1-x3db :t-2ea1-x4a3 :t-2ea1-x9bc :t-2ea1-x67f :t-2ea1-xbc2]
+    :p-67ec [:t-67ec-xae5 :t-67ec-xd34 :t-67ec-x3a6 :t-67ec-xe7f :t-67ec-x7f7]
 })
 
 (def tiles-with-exclusive #{
