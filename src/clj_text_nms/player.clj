@@ -118,18 +118,32 @@
     )
 )
 
-; Teleport to a location on the map
-; Both tile and planet will be changed.
-; Starship follows the player
-; newtile destination specified by player
-; returns player
-(defn teleport [player newtile]
-    (cond (nil? ((:map-locs player) newtile)) player
+(defn teleport_raw [player newtile]
+    (cond
         (not (= (:tile player) (:tile (:ship player)))) player
         (< (:fuel (:ship player)) 25) player
-        :else (-> player (assoc :tile newtile :planet (:planet (newtile map/loc-obj-map)))
-                    (assoc-in [:ship :tile] newtile)
-                    (update-ship-fuel #(- % 25)))))
+        :else (-> player
+            (assoc :tile newtile :planet (:planet (newtile map/loc-obj-map)))
+            (assoc-in [:ship :tile] newtile)
+            (update-ship-fuel #(- % 25)))))
+
+; Teleport to a random tile on planet
+; Both tile and planet will be changed.
+; Spaceship follows the player
+; planet specified by player
+; returns player
+(defn teleport-planet [player planet]
+    (if-let [tiles (map/planet-map planet)] (teleport_raw player (tiles (rand-int (count tiles))))
+        player))
+
+; Teleport to a tile
+; Both tile and planet will be changed.
+; Spaceship follows the player
+; newtile destination specified by player
+; returns player
+(defn teleport-tile [player newtile]
+    (cond (nil? ((:map-locs player) newtile)) player
+        :else (teleport_raw player newtile)))
 
 ; Interactive command, recharge Life Support.
 ; Returns new player status.
