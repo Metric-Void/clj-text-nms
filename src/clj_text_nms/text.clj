@@ -3,6 +3,8 @@
     (:require [clj-text-nms.map :as map])
     (:require [clj-text-nms.logic :as logic]))
 
+(def msg-win "You did it! 太陽の心をてにいれた。")
+
 (def options "    [S]can this territory
     [E]xplore this territory
     [G]o to another tile

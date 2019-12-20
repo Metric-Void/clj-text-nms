@@ -152,6 +152,10 @@
                                         )
                                     )
                                 )
+                        :else (do
+                                  (println "Invalid input.")
+                                  [player false]
+                                  )
                         )
                     )
                 )
@@ -181,61 +185,65 @@
             [player       (player/new-player)
              newstate     true]
 
-            (let [on-ship-tile (= (:tile player) (:tile (:ship player)))]
-            
-            (do (when newstate
-                    (do
-                        (println "=============================================================")
-                        (println (text/current-state player))
-                        (when on-ship-tile
-                            (println "You are on the same tile with your spaceship.")
+            (let [on-ship-tile (= (:tile player) (:tile (:ship player)))
+                  win-state    (not (nil? (:heart-of-the-sun (:inventory player))))]
+                
+                (if win-state
+                    (println text/msg-win)
+                    (do (when newstate
+                            (do
+                                (println "=============================================================")
+                                (println (text/current-state player))
+                                (when on-ship-tile
+                                    (println "You are on the same tile with your spaceship.")
+                                    )
+                                )
                             )
-                        )
-                    )
-                (println "You can")
-                (when on-ship-tile
-                    (println text/teleport-option)
-                    )
-                (println text/options)
-                (let [input (read-with-inst)]
-                    (if (symbol? input)
-                        (case (cljstr/lower-case (subs (name input) 0 1))
-                            "s" (do
-                                    (player/scan player)
-                                    (recur (player/tick-planet player) true)
-                                    )
-                            "e" (do
-                                    (println text/dividing-line)
-                                    (recur (player/tick-planet (explore/explore player)) true)
-                                    )
-                            "g" (recur (player/tick-planet (move player)) true)
-                            "m" (recur (player/tick-planet (player/mine player)) true)
-                            "v" (do
-                                    (println (text/msg-inventory player))
-                                    (recur player false)
-                                    )
-                            "c" (recur (player/tick-planet (craft player)) true)
-                            "b" (recur (player/estab-base player) true)
-                            "r" (recur (player/recharge-life-support player) true)
-                            "q" (println "See you again.")
-                            "t" (if (not on-ship-tile)
+                        (println "You can")
+                        (when on-ship-tile
+                            (println text/teleport-option)
+                            )
+                        (println text/options)
+                        (let [input (read-with-inst)]
+                            (if (symbol? input)
+                                (case (cljstr/lower-case (subs (name input) 0 1))
+                                    "s" (do
+                                            (player/scan player)
+                                            (recur (player/tick-planet player) true)
+                                            )
+                                    "e" (do
+                                            (println text/dividing-line)
+                                            (recur (player/tick-planet (explore/explore player)) true)
+                                            )
+                                    "g" (recur (player/tick-planet (move player)) true)
+                                    "m" (recur (player/tick-planet (player/mine player)) true)
+                                    "v" (do
+                                            (println (text/msg-inventory player))
+                                            (recur player false)
+                                            )
+                                    "c" (recur (player/tick-planet (craft player)) true)
+                                    "b" (recur (player/estab-base player) true)
+                                    "r" (recur (player/recharge-life-support player) true)
+                                    "q" (println "See you again.")
+                                    "t" (if (not on-ship-tile)
+                                            (do (println "Invalid input.")
+                                                (recur player false)
+                                                )
+                                            (let [result (teleport player)]
+                                                (recur (first result) (second result))
+                                                )
+                                            )
                                     (do (println "Invalid input.")
                                         (recur player false)
                                         )
-                                    (let [result (teleport player)]
-                                        (recur (first result) (second result))
-                                        )
                                     )
-                            (do (println "Invalid input.")
-                                (recur player false)
+                                (do (println "Invalid input.")
+                                    (recur player false)
+                                    )
                                 )
-                            )
-                        (do (println "Invalid input.")
-                            (recur player false)
                             )
                         )
                     )
-                )
                 )
             )
         )
