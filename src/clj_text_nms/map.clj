@@ -168,6 +168,11 @@
   :t-9a3e-x67e Luvocious-I-IV
 })
 
+(def planet-map {
+    :p-3dba [:t-3dba-xfce :t-3dba-xbea :t-3dba-xcaf :t-3dba-xdab :t-3dba-xaaa :t-3dba-xeff :t-3dba-xfda]
+    :p-9a3e [:t-9a3e-xfe4 :t-9a3e-xc4d :t-9a3e-xbd2 :t-9a3e-x67e]
+})
+
 (def tiles-with-exclusive #{
   :t-3dba-xfce :t-3dba-xeff :t-9a3e-xc4d :t-9a3e-x67e
 })
