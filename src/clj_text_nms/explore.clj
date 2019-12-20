@@ -25,23 +25,30 @@
     (println "You found a weird yellow flower on the ground. When you touched it, some kind of liquid seeped out.")
     (println "The liquid proved not dangerous or harmful to you.")
     player)
-  (fn [player]
-    (println "You found a distress beacon, It is covered in dust, and battery seems to have drained.")
-    (println "You managed to retrieve a log from the terminal, as follows:")
-    (println " - We were running an inter-galaxy trade route while encountered by pirates.")
-    (println " - Our ships were not designed to battle, and we took too much cargo to flee.")
-    (println " - We lost our thrust before the sentinels arrived.")
-    (println "Attached to the journal is a cargo and damage report. Everything in the report seems")
-    (println "to be outdated technical components that serve no use today.")
-    player)
-   (fn [player]
-      (println "A tree suddenly fell around you. Wood broke into small pieces that easily fits into")
-      (println "your inventory. You got some carbon.")
-      (add-item player {:carbon 10}))
-   (fn [player]
-      (println "Hey what's that! A gigantic bird! You felt happy."))
-   ]
-  )
+     (fn [player]
+       (println "You found a distress beacon, It is covered in dust, and battery seems to have drained.")
+       (println "You managed to retrieve a log from the terminal, as follows:")
+       (println " - We were running an inter-galaxy trade route while encountered by pirates.")
+       (println " - Our ships were not designed to battle, and we took too much cargo to flee.")
+       (println " - We lost our thrust before the sentinels arrived.")
+       (println "Attached to the journal is a cargo and damage report. Everything in the report seems")
+       (println "to be outdated technical components that serve no use today.")
+       player)
+     (fn [player]
+       (println "A temporary camp revealed footsteps of the past.")
+       (println "On a flatland lies some abandoned cargo. Surrounding them are several lights")
+       (println "A beacon is here sending location ")
+       player
+     )
+     (fn [player]
+        (println "A tree suddenly fell around you. Wood broke into small pieces that easily fits into")
+        (println "your inventory. You got some carbon.")
+        (add-item player {:carbon 10}))
+     (fn [player]
+        (println "Hey what's that! A gigantic bird! You felt happy.")
+        player
+     )
+])
 
 (def monster-fns
   [(fn [player]
@@ -86,6 +93,11 @@
     (add-item player {:ammo 10})
   )
   (fn [player]
+    (println "There's a first-aid kit in the research center.")
+    (println "You healed yourself using it.")
+    (player/update-hp player #(+ % 10))
+  )
+  (fn [player]
     (println "Your wandering around the facility has clearly made some sentinels unhappy.")
     (println "They tried to shoot you, buy you swiftly evaded.")
     player
@@ -98,6 +110,60 @@
       (add-item p {:ferrite-dust 20})
     )
   )
+  (fn [player]
+    (println "You found a curiousity in a secure room in the research center!")
+    (println "The Korvaxes are running a simulation of the universe here.")
+    (println "You extracted a record from the control interface.")
+    (add-item player {:sim-record 1})
+  )
+])
+
+(def cliff-at-mii-vii [
+  (fn [player]
+    (println "You tried to get a better view of the terrain by climbing up a mountain.")
+    (println "But you slipped off during climbing. Your exosuit got a slight damage.")
+    (player/update-hp player #(- % 5))
+  )
+ (fn [player]
+   (println "You found something precious on the cliff!")
+   (println "The mountain contained a gold deposit. You mined some of them.")
+   (add-item player {:gold 30})
+ )
+])
+
+(def luvocious-i-ii [
+  (fn [player]
+    (println "A plant suddenly shot a spike, targeting another planet.")
+    (println "This seems to be their way of mating.")
+    player
+  )
+  (fn [player]
+    (println "Night has arrived, and you discovered this marvellous creature.")
+    (println "It gathers light from surroundings and creates a curiousity inside its body.")
+    (println "This process may took thousands of ages, but luckily one of them has completed the cycle.")
+    (println "You've found the curiousity 'Light of Night'!")
+    (add-item player {:light-of-night 1})
+  )
+])
+
+(def luvocious-i-iv [
+  (fn [player]
+    (println "You headed directly to the Korvax Transmission tower.")
+    (println "But as you get closer, you felt weird pulses that you never experienced before.")
+    (println "The signal is definitely not just electromagnetic wave.")
+    (println "The signal is bringing you fear.")
+    player
+  )
+  (fn [player]
+    (println "Feeling creepy, you still headed to the tower.")
+    (println "As you examine the antenna and transmission modulator, you found that it's not")
+    (println "a normal transmission tower. This tower transmit signal through all realities")
+    (println "across multiple universes. The signal is then relayed to other stations in this")
+    (println "universe. This is a central router.")
+    (println "You found a broken replacement part and repaired it. It is a curiosity called")
+    (println "An Asynchronous Exciter. It can send a particle to another universe.")
+    (add-item player {:async-obj 1})
+  )
 ])
 
 (def env-vec-map {
@@ -106,9 +172,12 @@
 })
 
 (def explore-functions {
-    :observatory-one [observatory-one]
+    :observatory-one observatory-one
     :none []
-    :korvax-at-mii-vi [korvax-at-mii-vi]
+    :korvax-at-mii-vi korvax-at-mii-vi
+    :cliff-at-mii-vii cliff-at-mii-vii
+    :luvocious-i-ii luvocious-i-ii
+    :luvocious-i-iv luvocious-i-iv
     ; TODO
 })
 
@@ -118,5 +187,6 @@
   (let [curr-tile (:tile player)
         tile-obj (curr-tile map/loc-obj-map)
         explorable-ops (concat ((:type tile-obj) env-vec-map) ((:shelter tile-obj) explore-functions) )]
-    ((rand-nth explorable-ops) player))
+    ((rand-nth explorable-ops) player)
+  )
 )
