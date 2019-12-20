@@ -78,6 +78,11 @@
   :t-9a3e-xc4d "Ewwessalic Grassland"
   :t-9a3e-xbd2 "Ebatus Pit"
   :t-9a3e-x67e "Rhyfordias Terminus"
+  :p-5fec "Talandra"
+  :p-5fec-xaac "Shariat Cliff"
+  :p-5fec-xbee "Gorfis Tundra"
+  :p-5fec-xdec "Nova Constantinople"
+  :p-5fec-xdda "Tolkien Glacier"
 })
 
 ;;
@@ -95,11 +100,15 @@
   :t-3dba-xdab {:east :t-3dba-xcaf, :south :t-3dba-xfce, :west nil, :north :t-3dba-xaaa},
   :t-3dba-xaaa {:east :t-3dba-xeff, :south :t-3dba-xdab, :west nil, :north nil},
   :t-3dba-xeff {:east :t-3dba-xfda, :south :t-3dba-xcaf, :west :t-3dba-xaaa, :north nil},
-  :t-3dba-xfda {:east nil, :south nil, :west :t-3dba-xeff, :north nil}
-  :t-9a3e-xc4d {:east :t-9a3e-x67e :north :t-9a3e-xfe4}
-  :t-9a3e-x67e {:west :t-9a3e-xc4d :north :t-9a3e-xbd2}
-  :t-9a3e-xfe4 {:south :t-9a3e-xc4d :east :t-9a3e-xbd2}
-  :t-9a3e-xbd2 {:south :t-9a3e-x67e :west :t-9a3e-xfe4}
+  :t-3dba-xfda {:east nil, :south nil, :west :t-3dba-xeff, :north nil},
+  :t-9a3e-xc4d {:east :t-9a3e-x67e :north :t-9a3e-xfe4},
+  :t-9a3e-x67e {:west :t-9a3e-xc4d :north :t-9a3e-xbd2},
+  :t-9a3e-xfe4 {:south :t-9a3e-xc4d :east :t-9a3e-xbd2},
+  :t-9a3e-xbd2 {:south :t-9a3e-x67e :west :t-9a3e-xfe4},
+  :p-5fec-xaac {:east nil, :south :p-5fec-xdec, :west nil, :north nil},
+  :p-5fec-xbee {:east nil, :south nil, :west :p-5fec-xdec, :north nil},
+  :p-5fec-xdec {:east :p-5fec-xbee, :south :p-5fec-xdda, :west nil, :north :p-5fec-xaac},
+  :p-5fec-xdda {:east nil, :south nil, :west nil, :north :p-5fec-xdec}
 })
 
 (def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 5))
@@ -169,6 +178,24 @@
 (def Nudryorob-IV (Tile. :normal :p-59aa :t-59aa-xbdf :none
                   "Barren Land with absoultely no sign of life.\nGround have traces of high temperature"
                   {:carbon 3 :cu 1 :gold 1 :silver 1} {:chro 2 :mag-ferrite 1 :io-cob 3}))
+
+(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
+
+(def Talandra-V-I (Tile. :normal :p-5fec :p-5fec-xaac :none
+                            "A rock cliff covered by ice."
+                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow 1}))
+
+(def Talandra-V-II (Tile. :normal :p-5fec :p-5fec-xbee :none
+                            "A tundra landscape. Only moss and lichen grows here"
+                            {:carbon 1 :co2 2 :ferrite-dust 1} {:sic-pow 1}))
+
+(def Talandra-V-III (Tile. :normal :p-5fec :p-5fec-xdec :fortress
+                            "An open ground with a huge man-made structure in the center.\nIt seems to be a shelter, but was deserted a long time ago.\nYou don't know who built it or what it was for."
+                            {:co2 1 :ferrite-dust 3} {}))
+
+(def Talandra-V-IV (Tile. :normal :p-5fec :p-5fec-xdda :none
+                            "A glacier made of pure ice."
+                            {:co2 5} {:sic-pow 2}))
 
 (def loc-obj-map {
   :p-3dba Mabiangra-II
