@@ -249,13 +249,33 @@
 (def umis-iv [
   (fn [player]
     (println "This is a Vy-Keen production facility, a weird sight")
-    (println "since most creatures think they only know about wars.")
+    (println "since most other civilizations think they only know about wars.")
     (println "This facility is making antimatter for starship hyperdrives")
     (println "But they just found a better method than colliding particles")
     (println "So they're getting rid of old particle colliders.")
     (println "You got the curiosity: Particle Collider!")
     (add-item player {:part-collider 1})
   )
+])
+
+(def noos-gel [
+  (fn [player]
+    (println "On this toxic planet you found a yellow, jelly pond.")
+    (println "You tried to shot your mining laser upon it, but it started to move")
+    (println "It is slowly surrounding you from all directions. You ran away in fear.")
+    (println "You cost extra Life Support when running away due to high body activity.")
+    (player/update-ls player #(- % 10))
+  )
+ (fn [player]
+   (println "On this toxic planet you found a yellow, jelly pond.")
+   (println "When you get closer for examining it, the liquid started to move")
+   (println "It is talking to you via telepathy, and it can sense your mind.")
+   (println "It retracted after confirming that you're friendly.")
+   (println "You fed the pond with some carbon and ammonium. It seemed happy.")
+   (println "You took a sample from the pond using the container you have.")
+   (println "You got the curiousity: Noospheric Gel!")
+   (add-item player {:noospheric-gel 1})
+ )
 ])
 
 (def env-vec-map {
@@ -283,6 +303,11 @@
   (let [curr-tile (:tile player)
         tile-obj (curr-tile map/loc-obj-map)
         explorable-ops (concat ((:type tile-obj) env-vec-map) ((:shelter tile-obj) explore-functions) )]
-    ((rand-nth explorable-ops) player)
+    (loop [current-trial ((rand-nth explorable-ops) player)]
+      (if-not (nil? current-trial)
+        current-trial
+        (recur ((rand-nth explorable-ops) player))
+      )
+    )
   )
 )

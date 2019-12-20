@@ -134,17 +134,17 @@
   :t-2ea1-xbc2 {:north :t-2ea1-x67f :east :t-2ea1-x3db}
 })
 
-(def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet" 30.9 0.1 0.1 2))
+(def Mabiangra-II (Planet. :lush :g-lkx :p-3dba "A lush planet. Rich in Magnetized Ferrite and Paraffinum" 30.9 0.1 0.1 2))
 
-(def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet" 65.6 0.1 0.1 4))
+(def Luvocious-I (Planet. :hot :g-lkx :p-9a3e "A burning planet. Rich in Sulfur." 65.6 0.1 0.1 4))
 
-(def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere" 32.0 0.1 0.1 5))
+(def Nudryorob (Planet. :exotic :g-lkx :p-59aa "A planet with no atmosphere. Rich in all kins of metal." 32.0 0.1 0.1 5))
 
-(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -40.0 0.1 0.1 4))
+(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet. Rich in Dioxide and ferrite" -40.0 0.1 0.1 4))
 
-(def Umis (Planet. :rad :g-lkx :p-2ea1 "A radioactive planet" 20.0 6.3 0.3 4))
+(def Umis (Planet. :rad :g-lkx :p-2ea1 "A radioactive planet. Rich in Uranium" 20.0 6.3 0.3 4))
 
-(def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
+; (def Talandra-V (Planet. :cold :g-lkx :p-5fec "A cold planet" -295 0.1 0.1 4))
 
 (def Mabiangra-II-I (Tile. :normal :p-3dba :t-3dba-xfce :observatory-one
                            "An open ground with a Gek Observatory in the center.\nYou can see lots of plants around, but no animals.\nRocks on the ground seems to be rich of ferrite."
@@ -193,11 +193,11 @@
 
 (def Nudryorob-I (Tile. :exotic :p-59aa :t-59aa-e4d2 :none
                  "Barren Land with absolutely no sign of life.\nGround looks yellowish."
-                 {:ferrite-dust 5 :cu 2} {:gold 3 :silver 2 :cu 3 :platinum 1 :cob 2}))
+                 {:ferrite-dust 5 :cu 2 :ura 3} {:gold 3 :silver 2 :cu 3 :platinum 1 :cob 2}))
 
 (def Nudryorob-II (Tile. :exotic :p-59aa :t-59aa-ca57 :none
                   "Barren Land with absolutely no sign of life.\nGround looks silverish."
-                  {:ferrite-dust 5} {:gold 2 :silver 4 :cu 1 :platinum 3 :cob 2}))
+                  {:ferrite-dust 5 :cob 2} {:gold 2 :silver 4 :cu 1 :platinum 3 :cob 2}))
 
 (def Nudryorob-III (Tile. :exotic :p-59aa :t-59aa-xadf :none
                   "Barren Land with absoultely no sign of life.\nMost of the rocks have turned to dust."
@@ -205,7 +205,7 @@
 
 (def Nudryorob-IV (Tile. :exotic :p-59aa :t-59aa-xbdf :none
                   "Barren Land with absoultely no sign of life.\nGround have traces of high temperature"
-                  {:carbon 3 :chro 2} { :cu 1 :gold 1 :silver 1 :mag-ferrite 1 :io-cob 3}))
+                  {:carbon 3 :ferrite-dust 5} {:chro 2 :cu 1 :gold 1 :silver 1 :mag-ferrite 1 :io-cob 3}))
 
 (def Nudryorob-V (Tile. :exotic :p-59aa :t-59aa-x2bc :nudryorob-v
                         "Barrend Land on a high mountain, with a great view of the stars."
@@ -213,7 +213,7 @@
 
 (def Talandra-V-I (Tile. :normal :p-5fec :t-5fec-xaac :none
                             "A rock cliff covered by ice."
-                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow 1}))
+                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow    1}))
 
 (def Talandra-V-II (Tile. :normal :p-5fec :t-5fec-xbee :none
                             "A tundra landscape. Only moss and lichen grows here"
