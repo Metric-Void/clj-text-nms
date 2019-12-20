@@ -10,6 +10,7 @@
     [V]iew your inventory
     [C]raft new items
     [B]uild a base on this tile
+    [R]echarge life support
     [Q]uit the game")
 
 (def teleport-option "    [T]eleport")

@@ -138,7 +138,7 @@
     (if (contains? (:inventory player) :oxygen)
         (let [
             single-charge 3                                                 ; Defines how much LS each oxygen charges.
-            required-amount (int (/ (- 100 (:ls player) single-charge)))    ; Required amount to charge to full
+            required-amount (int (/ (- 100 (:ls player)) single-charge))    ; Required amount to charge to full
             have-amount (:oxygen (:inventory player))       ; The amount of oxygen the player have.
             use-amount (min required-amount have-amount)    ; The actual amount of Oxygen that can be used.
             ls-change-amount (* single-charge use-amount)   ; The amount of LS charged

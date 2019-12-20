@@ -118,7 +118,7 @@
 (defn move
     [player]
     (do
-        (println text/msg-move)
+        (printf "%s\n%s\n" text/dividing-line text/msg-move)
         (let [input (read-with-inst)]
             (case (cljstr/lower-case (subs (name input) 0 1))
                 "n" (player/move player :north)
@@ -172,6 +172,7 @@
                                     )
                             "c" (recur (player/tick-planet (craft player)) true)
                             "b" (recur (player/estab-base player) true)
+                            "r" (recur (player/recharge-life-support player) true)
                             "q" (println "See you again.")
                             "t" (if (not on-ship-tile)
                                     (do (println "Invalid input.")
