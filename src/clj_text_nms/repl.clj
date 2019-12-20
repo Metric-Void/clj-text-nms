@@ -113,49 +113,55 @@
 
 (defn teleport
     [player]
-    (let [input   (read-with-inst text/prompt-teleport)
-          initial (cljstr/lower-case (subs (name input) 0 1))]
-        (if (not (or (= initial "p") (= initial "t")))
-            (do
-                (println "Invalid input.")
-                [player false]
-                )
-            (do
-                (println (text/msg-teleport-dest player initial))
-                (let [input2  (read-with-inst "[C]ancel or teleport to")]
-                    (cond
-                        (symbol? input2)
-                            (do
-                                (if (= (cljstr/lower-case (subs (name input2) 0 1)) "c")
-                                    (println "Teleport canceled.")
-                                    (println "Invalid input.")
-                                    )
-                                [player false]
-                                )
-                        (number? input2)
-                            (if (or (< input2 0)
-                                    (> input2 (case initial
-                                                  "p" (count map/planet-map)
-                                                  "t" (count (:map-locs player))
-                                                  )
-                                       )
-                                    )
+    (if (< (:fuel (:ship player)) 25)
+        (do
+            (println "You don't have enough fuel to take off.")
+            [player false]
+            )
+        (let [input   (read-with-inst text/prompt-teleport)
+            initial (cljstr/lower-case (subs (name input) 0 1))]
+            (if (not (or (= initial "p") (= initial "t")))
+                (do
+                    (println "Invalid input.")
+                    [player false]
+                    )
+                (do
+                    (println (text/msg-teleport-dest player initial))
+                    (let [input2  (read-with-inst "[C]ancel or teleport to")]
+                        (cond
+                            (symbol? input2)
                                 (do
+                                    (if (= (cljstr/lower-case (subs (name input2) 0 1)) "c")
+                                        (println "Teleport canceled.")
+                                        (println "Invalid input.")
+                                        )
+                                    [player false]
+                                    )
+                            (number? input2)
+                                (if (or (< input2 0)
+                                        (> input2 (case initial
+                                                    "p" (count map/planet-map)
+                                                    "t" (count (:map-locs player))
+                                                    )
+                                        )
+                                        )
+                                    (do
+                                        (println "Invalid input.")
+                                        [player false]
+                                        )
+                                    (do
+                                        (println "Teleport succeeded.")
+                                        (case initial
+                                            "p" [(player/teleport-planet player (nth (keys map/planet-map) input2)) true]
+                                            "t" [(player/teleport-tile   player (nth (:map-locs player)    input2)) true]
+                                            )
+                                        )
+                                    )
+                            :else (do
                                     (println "Invalid input.")
                                     [player false]
                                     )
-                                (do
-                                    (println "Teleport succeeded.")
-                                    (case initial
-                                        "p" [(player/tick-planet (player/teleport-planet player (nth (keys map/planet-map) input2))) true]
-                                        "t" [(player/tick-planet (player/teleport-tile   player (nth (:map-locs player)    input2))) true]
-                                        )
-                                    )
-                                )
-                        :else (do
-                                  (println "Invalid input.")
-                                  [player false]
-                                  )
+                            )
                         )
                     )
                 )
