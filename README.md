@@ -1,18 +1,29 @@
 # clj-text-nms
 
-*** WORK IN PROGRESS. NOT YET FINISHED***
+clj-text-nms is a text adventure game, based on the world of No Man's Sky.
+The player will land on a planet, then you can mine resources, explore sites, collect artifacts...
 
-A text adventure game like No Man's Sky, written in Clojure.
+Your final goal in this game is to craft "Heart of the Sun". In order to collect this artifact, you need to
+go to various planets, explore for curiosities, and mine resources. See [Player Guide](doc/guide.md).
 
 ## Installation
 
 Clone the whole repository, then run `lein run`
 
+## Playing
+
+The game contained brief in-game instructions that you can call in the menu.
+A more detailed (and better formatted) guide can be found at [Player Guide](doc/guide.md)
+
+## Developers / Contributing
+
+Go here -> [Developer's Guide](doc/index.md)
+
 ## License
 
 MIT License
 
-Copyright (c) 2019 Zixi Lee
+Copyright (c) 2019 Zixi Lee, Tianyi Wang, Xuyang Tang.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
