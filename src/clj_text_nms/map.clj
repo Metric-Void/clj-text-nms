@@ -188,11 +188,11 @@
 
 (def Luvocious-I-I (Tile. :normal :p-9a3e :t-9a3e-xfe4 :none
                            "A desert. The sands are even too hot to stand on."
-                           {:sulfur 3 :carbon 1 :oxygen 1 :sic-pow 3 :cu 1} {:cob 2}))
+                           {:sulf 3 :carbon 1 :oxygen 1 :sic-pow 3 :cu 1} {:cob 2}))
 
 (def Luvocious-I-II (Tile. :normal :p-9a3e :t-9a3e-xc4d :luvocious-i-ii
                            "A flatland with lots of plants. They all have small leaves and a red stem."
-                           {:carbon 5 :sulfur 1 :oxygen 3} {:cu 1 :mag-ferrite 2}))
+                           {:carbon 5 :sulf 1 :oxygen 3} {:cu 1 :mag-ferrite 2}))
 
 (def Luvocious-I-III (Tile. :normal :p-9a3e :t-9a3e-xbd2 :none
                             "An underground cave. Some weird plants are generating weird gas."
@@ -200,7 +200,7 @@
 
 (def Luvocious-I-IV (Tile. :normal :p-9a3e :t-9a3e-x67e :luvocious-i-iv
                            "A Korvax Transmission Tower stands at the center of a midland."
-                           {:sulfur 3 :carbon 2 :oxygen 2 :sic-pow 1} {:cob 2 :mag-ferrite 2}))
+                           {:sulf 3 :carbon 2 :oxygen 2 :sic-pow 1} {:cob 2 :mag-ferrite 2}))
 
 (def Nudryorob-I (Tile. :exotic :p-59aa :t-59aa-e4d2 :none
                  "Barren Land with absolutely no sign of life.\nGround looks yellowish."
@@ -234,7 +234,7 @@
                             "An open ground with a huge man-made structure in the center.\nIt seems to be a shelter, but was deserted a long time ago.\nYou don't know who built it or what it was for."
                             {:co2 1 :ferrite-dust 3} {}))
 
-(def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :none
+(def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :talandra-v-iv
                             "A glacier made of pure ice."
                             {:co2 5} {:sic-pow 2}))
 
@@ -329,7 +329,7 @@
 
 (def tiles-with-exclusive #{
   :t-3dba-xfce :t-3dba-xeff :t-9a3e-xc4d :t-9a3e-x67e
-  :t-59aa-x2bc :p-5fec-xdda :p-5fec-xdec :t-2ea1-x67f :t-2ea1-x3db
+  :t-59aa-x2bc :t-5fec-xdda :t-5fec-xdec :t-2ea1-x67f :t-2ea1-x3db
 })
 
 (defn describe-planet [planet]

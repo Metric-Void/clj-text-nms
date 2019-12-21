@@ -14,7 +14,7 @@
 (defn new-spaceship []
     "Initialize a new spaceship"
     (Spaceship. 100 :t-3dba-xfce))
-    
+
 ; Update :fuel of spaceship inside player. This function ensures fuel is between 0 and 100.
 (defn update-ship-fuel [player ifn] (update-in player [:ship :fuel] (fn [v] (-> v (#(min 100 (max 0 %))) (ifn)))))
 
@@ -27,11 +27,12 @@
 ; inventory - His inventory
 ; adv-laster - Whether the player have got advanced laser.
 ; ship-tile - The location of the player's Spaceship.
-(defrecord Player [hp ls galaxy planet tile inventory adv-laser ship map-locs base-tiles])
+; flags - A set of flags to indicated event history.
+(defrecord Player [hp ls galaxy planet tile inventory adv-laser ship map-locs base-tiles flags])
 
 (defn new-player []
     "Initialize a new player"
-    (Player. 100 100 :g-lkx :p-3dba :t-3dba-xfce (hash-map) false (new-spaceship) #{:t-3dba-xfce} #{}))
+    (Player. 100 100 :g-lkx :p-3dba :t-3dba-xfce (hash-map) false (new-spaceship) #{:t-3dba-xfce} #{} #{}))
 
 ; Modifies the player's life support according to the current planet.
 ; If life support is zero, decrease player's HP by 10.
@@ -160,7 +161,8 @@
         ]
             (println (format "Use %d oxygen to charge Life Support from %d to %d?\n[1] Yes [2] No" use-amount (:ls player) after-charge))
             (if (= (read) 1)
-                (do (println "Success!") (assoc player :ls after-charge))
+                (do (println "Success!")
+                    (-> player (assoc :ls after-charge) (assoc-in [:inventory :oxygen] (- have-amount use-amount))))
                 (do (println "Cancelled") player)
             )
         )
@@ -183,7 +185,8 @@
         ]
             (println (format "Use %d uranium to charge spaceship Fuel from %d to %d?\n[1] Yes [2] No" use-amount (:fuel (:ship player)) after-charge))
             (if (= (read) 1)
-                (do (println "Success!") (assoc-in player [:ship :fuel] after-charge))
+                (do (println "Success!")
+                    (-> player (assoc-in [:ship :fuel] after-charge) (assoc-in [:inventory :ura] (- have-amount use-amount))))
                 (do (println "Cancelled") player)
             )
         )
