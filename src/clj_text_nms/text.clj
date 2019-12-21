@@ -146,7 +146,7 @@
                     )
                 )
         "t" (loop
-                [tile-list (:map-locs player)
+                [tile-list (vec (:map-locs player))
                 count      0
                 msg        (format "%s\nHere are the tiles you can teleport to" dividing-line)]
                 (if (empty? tile-list)

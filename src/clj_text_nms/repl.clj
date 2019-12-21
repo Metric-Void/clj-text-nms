@@ -127,7 +127,8 @@
                     )
                 (do
                     (println (text/msg-teleport-dest player initial))
-                    (let [input2  (read-with-inst "[C]ancel or teleport to")]
+                    (let [vec-locs (vec (:map-locs player))
+                          input2  (read-with-inst "[C]ancel or teleport to")]
                         (cond
                             (symbol? input2)
                                 (do
@@ -153,7 +154,7 @@
                                         (println "Teleport succeeded.")
                                         (case initial
                                             "p" [(player/teleport-planet player (nth (keys map/planet-map) input2)) true]
-                                            "t" [(player/teleport-tile   player (nth (:map-locs player)    input2)) true]
+                                            "t" [(player/teleport-tile   player (nth vec-locs    input2)) true]
                                             )
                                         )
                                     )
