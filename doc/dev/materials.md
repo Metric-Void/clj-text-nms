@@ -23,4 +23,3 @@ These materials are specific to planets, and can be mined without advanced minin
 - CO2: Confined to "cold" planets.
 - Sulfur: Confined to "hot" planets.
 - Chloride: Confined to planets with water.
-

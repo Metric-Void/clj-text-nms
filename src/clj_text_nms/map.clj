@@ -224,7 +224,7 @@
 
 (def Talandra-V-I (Tile. :normal :p-5fec :t-5fec-xaac :none
                             "A rock cliff covered by ice."
-                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow    1}))
+                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow 1}))
 
 (def Talandra-V-II (Tile. :normal :p-5fec :t-5fec-xbee :none
                             "A tundra landscape. Only moss and lichen grows here"
@@ -236,7 +236,7 @@
 
 (def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :talandra-v-iv
                             "A glacier made of pure ice."
-                            {:co2 5} {:sic-pow 2}))
+                            {:co2 5 :oxygen 3} {:sic-pow 2}))
 
 (def Umis-I (Tile. :normal :p-2ea1 :t-2ea1-x9bc :none
                    "Maybe a grassland, but you hestitate to call these plants \"grass\"."
@@ -275,8 +275,8 @@
                    "A high mountain with its peaks covered in snow."
                    {:ammo 2 :di-hydro 2} {:sic-pow 2}))
 
-(def Pathavon-V (Tile. :normal :p-67ec :t-67ec-x7f7 :none
-                   "A plateau with heavy seasonal rainfall."
+(def Pathavon-V (Tile. :normal :p-67ec :t-67ec-x7f7 :noos-gel
+                   "A plateau with heavy seasonal rainfall. A pond has formed in the centre."
                    {:carbon 1 :ammo 4 :di-hydro 2} {:sic-pow 3 :cond-carbon 3}))
 
 (def loc-obj-map {

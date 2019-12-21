@@ -68,7 +68,7 @@
     (loop
         [recipes (logic/craftable state)
          count   0
-         msg     "-------------------------------------------------------------\nThings you can craft:\n"]
+         msg     "-------------------------------------------------------------\nThings you can craft:\n(For all crafting recipes, see \"docs/guide.md\")\n"]
 
         (if (empty? recipes)
             (str msg "Enter a number or [f]inish crafting.")
@@ -79,7 +79,8 @@
                     (format "%1$s%2$2d: %3$18s\n"
                         msg 
                         count
-                        ((first (keys (last recipe))) map/name-map)
+                            ; ((first (keys (last recipe))) map/name-map)
+                        (logic/str-craft recipe)
                         (first (vals (last recipe)))
                         )
                     )
@@ -208,5 +209,7 @@
     "In this game you will travel on and between planets, mine resources, craft items...."
     "And your final goal is to craft \"Heart of the Sun\". It require exclusive ingredients"
     "that could only be found by exploring regions. Your scanner will tell you if a region"
-    "contains exclusive items."
+    "contains exclusive items.\n\n"
+    "It is extremely recommended that you read the Game Guide, located at doc/guide.md."
+    "You can find things like crafting recipes, mineral guides, and many other tips."
 ))
