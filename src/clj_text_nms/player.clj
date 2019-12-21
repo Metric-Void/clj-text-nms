@@ -168,6 +168,29 @@
     )
 )
 
+; Interactive command, recharge ship Fuel.
+; Returns new player status.
+(defn recharge-ship-fuel [player]
+    "Prompts to recharge ship Fuel"
+    (if (contains? (:inventory player) :ura)
+        (let [
+            single-charge 5                                                 ; Defines how much Fuel each uranium charges.
+            required-amount (int (/ (- 100 (:fuel (:ship player))) single-charge))    ; Required amount to charge to full
+            have-amount (:ura (:inventory player))       ; The amount of uranium the player have.
+            use-amount (min required-amount have-amount)    ; The actual amount of uranium that can be used.
+            fuel-change-amount (* single-charge use-amount)   ; The amount of Fuel charged
+            after-charge (+ (:fuel (:ship player)) fuel-change-amount)     ; The value after charging
+        ]
+            (println (format "Use %d uranium to charge spaceship Fuel from %d to %d?\n[1] Yes [2] No" use-amount (:fuel (:ship player)) after-charge))
+            (if (= (read) 1)
+                (do (println "Success!") (assoc-in player [:ship :fuel] after-charge))
+                (do (println "Cancelled") player)
+            )
+        )
+        (do (println "Recharging spaceship fuel requires Uranium, which you don't have any.") player)
+    )
+)
+
 ; Recharge life support without asking
 (defn recharge-ls-silent [player]
     "Silently recharge Life Support"
