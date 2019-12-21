@@ -27,11 +27,12 @@
 ; inventory - His inventory
 ; adv-laster - Whether the player have got advanced laser.
 ; ship-tile - The location of the player's Spaceship.
-(defrecord Player [hp ls galaxy planet tile inventory adv-laser ship map-locs base-tiles])
+; flags - A set of flags to indicated event history.
+(defrecord Player [hp ls galaxy planet tile inventory adv-laser ship map-locs base-tiles flags])
 
 (defn new-player []
     "Initialize a new player"
-    (Player. 100 100 :g-lkx :p-3dba :t-3dba-xfce (hash-map) false (new-spaceship) #{:t-3dba-xfce} #{}))
+    (Player. 100 100 :g-lkx :p-3dba :t-3dba-xfce (hash-map) false (new-spaceship) #{:t-3dba-xfce} #{} #{}))
 
 ; Modifies the player's life support according to the current planet.
 ; If life support is zero, decrease player's HP by 10.

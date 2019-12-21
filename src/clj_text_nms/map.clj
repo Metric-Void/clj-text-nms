@@ -234,7 +234,7 @@
                             "An open ground with a huge man-made structure in the center.\nIt seems to be a shelter, but was deserted a long time ago.\nYou don't know who built it or what it was for."
                             {:co2 1 :ferrite-dust 3} {}))
 
-(def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :none
+(def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :talandra-v-iv
                             "A glacier made of pure ice."
                             {:co2 5} {:sic-pow 2}))
 
@@ -329,7 +329,7 @@
 
 (def tiles-with-exclusive #{
   :t-3dba-xfce :t-3dba-xeff :t-9a3e-xc4d :t-9a3e-x67e
-  :t-59aa-x2bc :p-5fec-xdda :p-5fec-xdec :t-2ea1-x67f :t-2ea1-x3db
+  :t-59aa-x2bc :t-5fec-xdda :t-5fec-xdec :t-2ea1-x67f :t-2ea1-x3db
 })
 
 (defn describe-planet [planet]

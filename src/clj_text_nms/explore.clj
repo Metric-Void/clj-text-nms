@@ -99,16 +99,18 @@
 
 (def fortress
   [(fn [player]
-    (println "The place turns out to be the last fortress of an alien civilization.")
-    (println "Here the survivals of this species spent their final days.")
-    (println "You do not know exactly what difficulties they encountered.")
-    (println "There are some remaining supplies. The food is still edible!")
-    (println "It tastes like dirt, but restored some HP.")
-    (-> player
-      (add-item {:silver 36, :gold 23, :platinum 17, :io-cob 32, :met-plate 8, :dih-gel 5, :c-tube 3, :h-seal 2})
-      (player/update-hp #(+ % 10))
-      ;;todo set flag
-    ))
+    (if (nil? ((:flags player) :supplies)) (do 
+      (println "The place turns out to be the last fortress of an alien civilization.")
+      (println "Here the survivals of this species spent their final days.")
+      (println "You do not know exactly what difficulties they encountered.")
+      (println "There are some remaining supplies. The food is still edible!")
+      (println "It tastes like dirt, but you restored some HP.")
+      (-> player
+        (add-item {:silver 36, :gold 23, :platinum 17, :io-cob 32, :met-plate 8, :dih-gel 5, :c-tube 3, :h-seal 2})
+        (player/update-hp #(+ % 10))
+        (update :flags #(conj % :supplies))))
+      nil))
+
    (fn [player]
     (println "You find a way into the deepest part of the fortress and see a laboratory.")
     (println "There is a dark dodecahedron box on the table. It seems unbreakable.")
@@ -293,6 +295,7 @@
     :luvocious-i-iv luvocious-i-iv
     :nudryorob-v nudryorob-v
     :talandra-v-iv talandra-v-iv
+    :fortress fortress
     :umis-iii umis-iii
     :umis-iv umis-iv
 })
