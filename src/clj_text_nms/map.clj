@@ -55,6 +55,7 @@
   :heart-of-the-sun "Heart of the Sun"                      ;Final goal
 })
 
+; Text descriptions of planet environment.
 (def planet-envs {
     :lush   "Lush - This planet is full of creatures. The atmosphere is dense and gravity is normal."
     :rad    "Radioactive - This planet is radioactive. Creatures on this planet have adapted to this envinronment and probably dangerous.\nRadioactive minerals can be found abundant here. \nLife support will drop as time goes."
@@ -64,6 +65,9 @@
     :exotic "This planet have no atmosphere and an apparent lack of life. Life support drops rapidly.\nHowever, metal resources can be found abundant here."
 })
 
+; Text names for planets.
+; Planets are referred to with keywords starting with g-.
+; Tiles are referred to with keywords starting with t-.
 (def loc-map {
   :g-lkx "Limekell X",
   :p-3dba "Mabiangra-II",
@@ -112,6 +116,7 @@
 ;;outpost     swamp
 ;;
 
+; Adjacency map. Store the relative positions between tiles.
 (def loc-dir-map {
   :t-3dba-xfce {:east :t-3dba-xbea, :south nil, :west nil, :north :t-3dba-xdab}
   :t-3dba-xbea {:east nil, :south nil, :west :t-3dba-xfce, :north :t-3dba-xcaf}
@@ -224,7 +229,7 @@
 
 (def Talandra-V-I (Tile. :normal :p-5fec :t-5fec-xaac :none
                             "A rock cliff covered by ice."
-                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow    1}))
+                            {:di-hydro 2 :co2 3 :ferrite-dust 1} {:mag-ferrite 2 :sic-pow 1}))
 
 (def Talandra-V-II (Tile. :normal :p-5fec :t-5fec-xbee :none
                             "A tundra landscape. Only moss and lichen grows here"
@@ -236,7 +241,7 @@
 
 (def Talandra-V-IV (Tile. :normal :p-5fec :t-5fec-xdda :talandra-v-iv
                             "A glacier made of pure ice."
-                            {:co2 5} {:sic-pow 2}))
+                            {:co2 5 :oxygen 3} {:sic-pow 2}))
 
 (def Umis-I (Tile. :normal :p-2ea1 :t-2ea1-x9bc :none
                    "Maybe a grassland, but you hestitate to call these plants \"grass\"."
@@ -275,10 +280,11 @@
                    "A high mountain with its peaks covered in snow."
                    {:ammo 2 :di-hydro 2} {:sic-pow 2}))
 
-(def Pathavon-V (Tile. :normal :p-67ec :t-67ec-x7f7 :none
-                   "A plateau with heavy seasonal rainfall."
+(def Pathavon-V (Tile. :normal :p-67ec :t-67ec-x7f7 :noos-gel
+                   "A plateau with heavy seasonal rainfall. A pond has formed in the centre."
                    {:carbon 1 :ammo 4 :di-hydro 2} {:sic-pow 3 :cond-carbon 3}))
 
+; Correspond keywords with objects.
 (def loc-obj-map {
   :p-3dba Mabiangra-II
   :t-3dba-xfce Mabiangra-II-I
@@ -318,6 +324,8 @@
   :t-67ec-x7f7 Pathavon-V
 })
 
+; A list of planets and tiles. This is used for teleporting.
+; So the program can generate a list of destinations.
 (def planet-map {
     :p-3dba [:t-3dba-xfce :t-3dba-xbea :t-3dba-xcaf :t-3dba-xdab :t-3dba-xaaa :t-3dba-xeff :t-3dba-xfda]
     :p-9a3e [:t-9a3e-xfe4 :t-9a3e-xc4d :t-9a3e-xbd2 :t-9a3e-x67e]
@@ -327,11 +335,13 @@
     :p-67ec [:t-67ec-xae5 :t-67ec-xd34 :t-67ec-x3a6 :t-67ec-xe7f :t-67ec-x7f7]
 })
 
+; Tiles with exclusive curiousities.
 (def tiles-with-exclusive #{
-  :t-3dba-xfce :t-3dba-xeff :t-9a3e-xc4d :t-9a3e-x67e
+  :t-3dba-xfce :t-3dba-xeff :t-9a3e-xc4d :t-9a3e-x67e :t-67ec-x7f7
   :t-59aa-x2bc :t-5fec-xdda :t-5fec-xdec :t-2ea1-x67f :t-2ea1-x3db
 })
 
+; Helper functions that generate text.
 (defn describe-planet [planet]
   (println (format "Planet: %s\nEnvironment: %s\nDescription: %s\nTemperature(avg.): %fC\nRadioactivity: %f rad.\nToxicity: %f tox."
   ((:id planet) loc-map) ((:type planet) planet-envs) (:desc planet) (:temp planet) (:rad planet) (:tox planet))

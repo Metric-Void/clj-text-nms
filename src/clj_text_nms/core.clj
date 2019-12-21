@@ -6,8 +6,11 @@
   (:require [clj-text-nms.logic :as logic])
   (:require [clj-text-nms.map :as map])
   (:require [clj-text-nms.text :as text]))
+; The above requirements are for easy debugging
+; So we can have enerything ready when going into lein repl.
 
 (defn -main
   "A Text version of NMS written in Clojure. Let's begin!"
   [& args]
-  (println "Hello, World!"))
+  (repl/new-game)
+)

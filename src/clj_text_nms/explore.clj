@@ -297,6 +297,7 @@
     :talandra-v-iv talandra-v-iv
     :fortress fortress
     :umis-iii umis-iii
+    :noos-gel noos-gel
     :umis-iv umis-iv
 })
 

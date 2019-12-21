@@ -1,5 +1,8 @@
 # Player's Guide
 
+This game is based on No Man's Sky, and the winning condition (acquiring **Heart of the Sun**) is actually a main mission 
+in the original game called "The Atlas Path".
+
 ## Player
 The player have the following fields to care about:
 
@@ -22,26 +25,61 @@ Each flight takes 25% of fuel. The tank can be recharged using Uranium.
 You'll have an address book of your bases and locations you learned during exploration. Yuo'll be able to teleport
 to these locations when you're together with your starship.
 
-## Planets 
+## Map
 Each planet is made up of several regions (or tiles), and the player can travel between tiles by "move"ing.
-Different tiles contain different resources, and may have distinct sites to explore.
+Different tiles contain different resources, and may have distinct sites to explore. You'll automaticaly perform a scan 
+when walking into a new region. Your starship does not follow you when moving.
 The planets are not made round, since we can't figure out which way should be south when we're at the north pole.
+
+If you're a hardcore player, it is recommended to draw a map for each of the planets.
 
 ## Mining
 Mining is the most important method in getting resources. You can mine on any tile, and each tile contains different
-resources. Some resources can only be obtained by "Advaneced Mining Laser", which is an essential tool to get 
+resources. Some resources can only be obtained by **"Advaneced Mining Laser"**, which is an essential tool to get 
 higher-level resources like gold and silver. These resources are fundamental to winning and you should consider crafting
 an advanced mining laser as soon as possible.
+
+If you're on an **exotic** planet, be extremely careful to have an Advanced Mining Laser. Materials on these type of planets
+almost certainly require an Advanced Mining Laser.
+
+## Materials
+Each planet have a common and a different set of materials.  
+These materials can be found on any planet, and can be mined without Advaced Mining Laser:
+
+- Ferrite dust
+- Carbon
+- Oxygen
+- Di-Hydrogen
+
+These materials can be found on any planet, but require Advanced Mining Laser:
+
+- Condensed Carbon
+- Copper
+- Magnetized Ferrite
+- Silicon Powder
+- Cobalt
+- Gold (Rare)
+- Silver (Rare)
+- Platinum (Rare)
+
+These materials are specific to planets, and can be mined without advanced mining laser.
+
+- Paraffinium: Confined to "lush" planets.
+- Uranium: Confined to "radioactive" planets.
+- Ammonium: Confined to "toxic" planets. Can also be found underground.
+- CO2: Confined to "cold" planets.
+- Sulfur: Confined to "hot" planets.
+- Chloride: Confined to planets with water (or other kinds of liquid body).
 
 ## Scanning
 Scanning a tile will reveal information about the tile and the planet. It'll also tell you whether the **curiousity** you
 need to complete this game is found on this tile. If it says "true", you can try getting this artifact by exploring this tile.
 
-## Moving
-You'll automaticaly perform a scan when you entered a new region. Your starship does not follow you when moving.
+## Exploring
+Exploring a region may give you 
 
 ## Crafting:
-Crafting is the central part of the game. Many items can be (or can only be obtained when) crafted.
+Crafting is the central part of the game. Many items can be obtained (or can only be obtained) by crafting.
 
 Here's a list of all crafting recipes.
 
