@@ -3,7 +3,24 @@
     (:require [clj-text-nms.map :as map])
     (:require [clj-text-nms.logic :as logic]))
 
+(def dividing-line "-------------------------------------------------------------")
+
+(def credit-line "---------------------------credit----------------------------")
+
 (def msg-win "You did it! 太陽の心をてにいれた。")
+
+(def msg-dead (format "%s\n%s" dividing-line "42342321 years later, another group of visitors scanned this territory.\nThey found elements that don't belong to this planet.\nHowever, why these elements are here is a mystery.\nMaybe there once existed another civalization and individuals were capable to travel in space."))
+
+(def credit
+    (format
+        "%s\n%s\n%s\n%s\n\n%s\n"
+        credit-line
+        "Li,   Zixi"
+        "Tang, Xuyang"
+        "Wang, Tianyi"
+        "A final project in CS296-25, Fall 2019"
+        )
+    )
 
 (def options "    [S]can this territory
     [E]xplore this territory
@@ -22,8 +39,6 @@
     [player]
     (format "Your HP: %2d%%     Life Supporting System: %2d%%" (:hp player) (:ls player))
     )
-
-(def dividing-line "-------------------------------------------------------------")
 
 ; (def current-state "Current State.")
 
