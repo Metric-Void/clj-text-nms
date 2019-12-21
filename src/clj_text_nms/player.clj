@@ -14,7 +14,7 @@
 (defn new-spaceship []
     "Initialize a new spaceship"
     (Spaceship. 100 :t-3dba-xfce))
-    
+
 ; Update :fuel of spaceship inside player. This function ensures fuel is between 0 and 100.
 (defn update-ship-fuel [player ifn] (update-in player [:ship :fuel] (fn [v] (-> v (#(min 100 (max 0 %))) (ifn)))))
 
@@ -184,7 +184,7 @@
         ]
             (println (format "Use %d uranium to charge spaceship Fuel from %d to %d?\n[1] Yes [2] No" use-amount (:fuel (:ship player)) after-charge))
             (if (= (read) 1)
-                (do (println "Success!") (-> player (assoc-in player [:ship :fuel] after-charge) (assoc-in [:inventory :oxygen] (- have-amount use-amount)))                
+                (do (println "Success!") (-> player (assoc-in [:ship :fuel] after-charge) (assoc-in [:inventory :oxygen] (- have-amount use-amount)))                
                 )
                 (do (println "Cancelled") player)
             )
