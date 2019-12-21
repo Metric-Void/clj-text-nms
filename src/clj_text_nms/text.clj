@@ -10,7 +10,7 @@
 
 (def msg-win "You did it! 太陽の心をてにいれた。")
 
-(def msg-dead (format "%s\n%s" dividing-line "42342321 years later, another group of visitors scanned this territory.\nThey found elements that don't belong to this planet.\nHowever, why these elements are here is a mystery.\nMaybe there once existed another civalization and individuals were capable to travel in space."))
+(def msg-dead (format "%s\n%s" dividing-line "Gave over!\nThe unfortunate traveler rests here forever in piece.\n42342321 years later, another team of explorers scanned this planet.\nThey found elements that do not belong to this planet, but why these elements were here remained a mystery.\nIt was assumed that there once existed another civilization that managed space travel technologies."))
 
 (def credit
     (format

@@ -209,7 +209,7 @@
             ls-change-amount (* single-charge use-amount)   ; The amount of LS charged
             after-charge (+ (:ls player) ls-change-amount)     ; The value after charging
         ]
-            (assoc player :ls after-charge)
+            (-> player (assoc :ls after-charge) (assoc-in [:inventory :oxygen] (- have-amount use-amount)))
         )
         (do (println "Recharging life support requires Oxygen, which you don't have any.") player)
     )
