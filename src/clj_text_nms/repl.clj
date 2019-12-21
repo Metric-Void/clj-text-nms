@@ -4,6 +4,7 @@
     (:require [clj-text-nms.player :as player])
     (:require [clj-text-nms.logic :as logic])
     (:require [clj-text-nms.text :as text])
+    (:require [clj-text-nms.help :as help])
     (:require [clj-text-nms.map :as map])
     (:require [clojure.string :as cljstr])
     )
@@ -189,6 +190,24 @@
         )
     )
 
+(defn help
+    []
+    (do
+        (println text/msg-help)
+        (let [input (read-with-inst "Enter the topic you are interest in")]
+            (if (symbol? input)
+                (let [help-key (keyword input)]
+                    (if (nil? (help-key help/helps))
+                        (println "We don't have help on that topic.")
+                        (printf "%s\n%s\n%s\n" text/dividing-line (help-key help/helps) text/dividing-line)
+                        )
+                    )
+                (println "Invalid input.")
+                )
+            )
+        )
+    )
+
 (defn new-game
     []
     (do (println text/op)
@@ -261,6 +280,10 @@
                                                         (recur player false continue)
                                                         )
                                                     (recur (player/tick-planet (player/recharge-ship-fuel player)) true continue)
+                                                    )
+                                            "h" (do
+                                                    (help)
+                                                    (recur player false continue)
                                                     )
                                             (do (println "Invalid input.")
                                                 (recur player false continue)

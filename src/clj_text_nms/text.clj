@@ -1,6 +1,7 @@
 (ns clj-text-nms.text
     (:gen-class)
     (:require [clj-text-nms.map :as map])
+    (:require [clj-text-nms.help :as help])
     (:require [clj-text-nms.logic :as logic]))
 
 (def dividing-line "-------------------------------------------------------------")
@@ -30,7 +31,9 @@
     [C]raft new items
     [B]uild a base on this tile
     [R]echarge life support
-    [Q]uit the game")
+    [Q]uit the game
+    
+    [H]elp")
 
 (def ship-tile-option "    [T]eleport
     [A]dd fuel to your spaceship")
@@ -184,6 +187,20 @@
     [W]est
     [S]outh
     [E]ast"
+    )
+
+(def msg-help
+    (loop
+        [list help/available-topics
+         msg  (format "%s\n%s" dividing-line "Help for these topics are available")]
+        (if (empty? list)
+            msg
+            (recur
+                (rest list)
+                (format "%s\n    %s" msg (first list))
+                )
+            )
+        )
     )
 
 (def op (str
