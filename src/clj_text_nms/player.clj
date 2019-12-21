@@ -76,7 +76,7 @@
 ; If amount not sufficient, returns nil and inventory is not modified.
 (defn rmv-item [player items]
     (let [new-inv (logic/subtract-hashmap (:inventory player) items)]
-        (if (nil? new-inv) nil (assoc :inventory player new-inv))
+        (if (nil? new-inv) nil (assoc player :inventory new-inv))
     )
 )
 
@@ -85,7 +85,7 @@
 (defn estab-base [player]
     "Establish a base on the current tile."
     (if (contains? (:base-tiles player) (:tile player))
-        (println "You already established a base on this tile!")
+        (do (println "You already established a base on this tile!") player)
         (let [new-player (rmv-item player {:chro 25})]
             (if (nil? new-player)
                 (do
@@ -94,7 +94,10 @@
                 )
                 (do
                     (println "Success // You've established a base on this tile.")
-                    (tick-planet (update new-player :base-tiles #(conj % (:tile player)) :map-locs #(conj % (:tile player))))
+                    (tick-planet (as-> new-player p
+                           (update p :base-tiles #(conj % (:tile player)))
+                           (update p :map-locs #(conj % (:tile player)))
+                    ))
                 )
             )
         )
