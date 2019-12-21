@@ -161,7 +161,7 @@
         ]
             (println (format "Use %d oxygen to charge Life Support from %d to %d?\n[1] Yes [2] No" use-amount (:ls player) after-charge))
             (if (= (read) 1)
-                (do (println "Success!") (assoc player :ls after-charge))
+                (do (println "Success!") (-> player (assoc :ls after-charge) (assoc-in [:inventory :oxygen] (- have-amount use-amount))))
                 (do (println "Cancelled") player)
             )
         )
@@ -184,7 +184,8 @@
         ]
             (println (format "Use %d uranium to charge spaceship Fuel from %d to %d?\n[1] Yes [2] No" use-amount (:fuel (:ship player)) after-charge))
             (if (= (read) 1)
-                (do (println "Success!") (assoc-in player [:ship :fuel] after-charge))
+                (do (println "Success!") (-> player (assoc-in player [:ship :fuel] after-charge) (assoc-in [:inventory :oxygen] (- have-amount use-amount)))                
+                )
                 (do (println "Cancelled") player)
             )
         )
