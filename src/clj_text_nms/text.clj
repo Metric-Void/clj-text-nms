@@ -15,7 +15,8 @@
     [R]echarge life support
     [Q]uit the game")
 
-(def teleport-option "    [T]eleport")
+(def ship-tile-option "    [T]eleport
+    [A]dd fuel to your spaceship")
 
 (defn current-state
     [player]

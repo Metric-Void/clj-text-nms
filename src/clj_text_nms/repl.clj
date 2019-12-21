@@ -175,10 +175,14 @@
         (printf "%s\n%s\n" text/dividing-line text/msg-move)
         (let [input (read-with-inst)]
             (case (cljstr/lower-case (subs (name input) 0 1))
-                "n" (player/move player :north)
-                "w" (player/move player :west)
-                "s" (player/move player :south)
-                "e" (player/move player :east)
+                "n" (player/tick-planet (player/move player :north))
+                "w" (player/tick-planet (player/move player :west))
+                "s" (player/tick-planet (player/move player :south))
+                "e" (player/tick-planet (player/move player :east))
+                (do
+                    (println "Invalid direction")
+                    player
+                    )
                 )
             )
         )
@@ -207,7 +211,7 @@
                             )
                         (println "You can")
                         (when on-ship-tile
-                            (println text/teleport-option)
+                            (println text/ship-tile-option)
                             )
                         (println text/options)
                         (let [input (read-with-inst)]
@@ -221,7 +225,7 @@
                                             (println text/dividing-line)
                                             (recur (player/tick-planet (explore/explore player)) true)
                                             )
-                                    "g" (recur (player/tick-planet (move player)) true)
+                                    "g" (recur (move player) true)
                                     "m" (recur (player/tick-planet (player/mine player)) true)
                                     "v" (do
                                             (println (text/msg-inventory player))
@@ -232,12 +236,18 @@
                                     "r" (recur (player/recharge-life-support player) true)
                                     "q" (println "See you again.")
                                     "t" (if (not on-ship-tile)
-                                            (do (println "Invalid input.")
+                                            (do (println "You need to be by your spaceship to teleport.")
                                                 (recur player false)
                                                 )
                                             (let [result (teleport player)]
                                                 (recur (first result) (second result))
                                                 )
+                                            )
+                                    "a" (if (not on-ship-tile)
+                                            (do (println "You need to be by your spaceship to add fuel.")
+                                                (recur player false)
+                                                )
+                                            (recur (player/tick-planet (player/recharge-ship-fuel player)) true)
                                             )
                                     (do (println "Invalid input.")
                                         (recur player false)
